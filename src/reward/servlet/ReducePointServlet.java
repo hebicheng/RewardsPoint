@@ -6,22 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import reward.biz.LoginBiz;
-import reward.biz.impl.LoginBizImpl;
+import reward.dao.impl.TeamerDaoImpl;
+import reward.entity.Teamer;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ReducePointServlet
  */
-@WebServlet("/LoginServlet")
-public class DoLoginServlet extends HttpServlet {
+@WebServlet("/ReducePointServlet")
+public class ReducePointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DoLoginServlet() {
+    public ReducePointServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +29,18 @@ public class DoLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		String username = request.getParameter("userName");
-		String password = request.getParameter("pwd");
-		LoginBiz loginBiz = new LoginBizImpl();
-		int status = loginBiz.login(username, password);
-		if(status == 0){
-			session.setAttribute("admin", "ONSTATUS");
-			response.sendRedirect("admin");
-			return;
-		}else if(status == -1){
-			request.setAttribute("message", "用户不存在");
-			request.getRequestDispatcher("login").forward(request, response);
-			return;
-		}else {
-			request.setAttribute("message", "密码错误");
-			request.getRequestDispatcher("login").forward(request, response);
-			return;
-		}
+		String name = request.getParameter("oprname");
+		String point = request.getParameter("score");
+		TeamerDaoImpl teamerDaoImpl = new TeamerDaoImpl();
+		double oldPoint = teamerDaoImpl.getPointByName(name);
+		double newpoint =  oldPoint - Double.parseDouble(point);
+		teamerDaoImpl.modifyPointByName(name, newpoint);
+		request.setAttribute("remessage", "Saved");
+		Teamer teamer = teamerDaoImpl.findTeamerByName(name);
+		request.setAttribute("selectteamer", teamer);
+		request.getRequestDispatcher("admin?name="+ name).forward(request, response);
+		return ;
 	}
 
 	/**

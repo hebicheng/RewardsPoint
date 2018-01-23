@@ -39,6 +39,30 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>reward.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddPointServlet</servlet-name>
+    <servlet-class>reward.servlet.AddPointServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddPointServlet</servlet-name>
+    <url-pattern>/addpoint</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReducePointServlet</servlet-name>
+    <servlet-class>reward.servlet.ReducePointServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReducePointServlet</servlet-name>
+    <url-pattern>/reducepoint</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>sql_dialect</param-name>
     <param-value>mysql</param-value>
@@ -47,6 +71,18 @@
     <param-name>data_source</param-name>
     <param-value>reward</param-value>
   </context-param>
+  <filter>
+    <filter-name>Filter</filter-name>
+    <filter-class>reward.filter.Filter</filter-class>
+    <init-param>
+      <param-name>LOGIN_PATH</param-name>
+      <param-value>/Reward/login</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>Filter</filter-name>
+    <url-pattern>/auth/*</url-pattern>
+  </filter-mapping>
   <resource-ref>
     <res-ref-name>jdbc/reward</res-ref-name>
     <res-auth>Container</res-auth>

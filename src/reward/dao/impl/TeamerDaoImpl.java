@@ -52,7 +52,7 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 					
 					String name = rs.getString("name");
 					int grade = rs.getInt("grade");
-					double point = rs.getInt("point");
+					double point = rs.getDouble("point");
 					String sicnuoj = rs.getString("sicnuoj");
 					String cf = rs.getString("cf");
 					String atcoder = rs.getString("atcoder");
@@ -68,8 +68,8 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 
 	@Override
 	public int modifyPointByName(String name, double score) {
-		String sql = "update from teamer set point=? where name=?";
-		Object[] params = { name, score };
+		String sql = "update teamer set point=? where name=?";
+		Object[] params = { score, name };
 		return this.executeUpdate(sql, params);
 	}
 

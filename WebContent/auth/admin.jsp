@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,12 +23,20 @@
 	<body>
 		<div class="container mian-container">
 			<div class="list-group left-side">
-				<a href="#" class="list-group-item list-group-item-success">何壁承</a>
-				<a href="#" class="list-group-item list-group-item-action">任力</a>	
+				<c:forEach var="teamers" items="${teamers}">
+					<c:choose>
+						<c:when test="${teamers.name eq selectteamer.name}">
+							<a href="admin?name=${teamers.name}" class="list-group-item list-group-item-success"> ${teamers.name} </a>
+						</c:when>
+						<c:otherwise>
+							<a href="admin?name=${teamers.name}" class="list-group-item"> ${teamers.name} </a>
+						</c:otherwise>
+					</c:choose>	
+				</c:forEach>
 			</div>
 			<div class="right-side">
 				<div class="card-head user">
-					<h1>何壁承<h1>
+					<h1>${selectteamer.name}<h1>
 				</div>
 				<div class="card-body">
 					<div class="card add-point">
@@ -35,22 +44,27 @@
 							<h2>Bonus Point<h2>
 						</div>
 						<div class="card-body">
-							
-							<form class="form-horizontal" id="addForm" method="post" action="javascript:void(0)" role="form">
+							<form class="form-horizontal" id="addForm" method="post" action="addpoint" role="form" value="${selectteamer.name}">
 							    <div class="row">
 							        <div class="col-md-offset-6 col-md-12">
+							        	<input type="hidden" name="oprname" value="${selectteamer.name}">
 										<div class="form-group">
-											<input type="text" class="form-control" id="addscore" name="score" placeholder="score">
+											<input type="text" class="form-control" id="addscore" name="score" placeholder="point">
 											<i class="fa fa-user"></i>
 										</div>
 										<div class="form-group">
-											<input type="password" class="form-control" id="addreason" name="reason" placeholder="reason">
+											<input type="text" class="form-control" id="addreason" name="reason" placeholder="reason">
 											<i class="fa fa-lock"></i>
 											<!--<a href="#" class="fa fa-question-circle"></a>-->
 										</div>
 							        </div>
 							   </div>
 								<div class="modal-footer">
+									<c:if test="${not empty addmessage }">
+										<div class="alert alert-success" id="asaved">
+											<strong>${addmessage }</strong>
+										</div>	
+									</c:if>
 									<input type="submit" class="btn btn-primary" value="Save">
 								</div>
 							</form>
@@ -62,21 +76,27 @@
 						</div>
 						<div class="card-body">
 							
-							<form class="form-horizontal" id="reduceForm" method="post" action="javascript:void(0)" role="form">
+							<form class="form-horizontal" id="reduceForm" method="post" action="reducepoint" role="form">
 							    <div class="row">
 							        <div class="col-md-offset-6 col-md-12">
+							        	<input type="hidden" name="oprname" value="${selectteamer.name}">
 										<div class="form-group">
-											<input type="text" class="form-control" id="reducescore" name="score" placeholder="score">
+											<input type="text" class="form-control" id="reducescore" name="score" placeholder="point">
 											<i class="fa fa-user"></i>
 										</div>
 										<div class="form-group">
-											<input type="password" class="form-control" id="reducereason" name="reason" placeholder="reason">
+											<input type="text" class="form-control" id="reducereason" name="reason" placeholder="reason">
 											<i class="fa fa-lock"></i>
 											<!--<a href="#" class="fa fa-question-circle"></a>-->
 										</div>
 							        </div>
 							   </div>
 								<div class="modal-footer">
+									<c:if test="${not empty remessage }">
+										<div class="alert alert-success" id="rsaved">
+											<strong>${remessage }</strong>
+										</div>	
+									</c:if>
 									<input type="submit" class="btn btn-primary" value="Save">
 								</div>
 							</form>

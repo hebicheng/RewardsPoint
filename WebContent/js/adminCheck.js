@@ -17,7 +17,7 @@ $(document).ready(function () {
 				required: "socre is required",
 				number: "score must be a number",
 				max: "score must be between 0 and 100",
-				max: "score must be between 0 and 100",
+				min: "score must be between 0 and 100",
 			},
 			reason: {
 				required: "reason is required"
@@ -76,7 +76,7 @@ $(document).ready(function () {
 				required: "socre is required",
 				number: "score must be a number",
 				max: "score must be between 0 and 100",
-				max: "score must be between 0 and 100",
+				min: "score must be between 0 and 100",
 			},
 			reason: {
 				required: "reason is required"
