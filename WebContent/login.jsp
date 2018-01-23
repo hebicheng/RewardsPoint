@@ -26,7 +26,7 @@
 				<h2>Admin Login</h2>
 			</div>
 		  	<div class="card-body">
-		  		<form class="form-horizontal" id="loginForm" method="post" action="login" role="form">
+		  		<form class="form-horizontal" id="loginForm" method="post" action="dologin" role="form">
 				    <div class="row">
 				        <div class="col-md-offset-6 col-md-12">
 							<div class="form-group">
