@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>Reward</display-name>
   <welcome-file-list>
-    <welcome-file>list</welcome-file>
+    <welcome-file>Rank</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -15,13 +15,46 @@
     <servlet-class>reward.servlet.InitServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
   <servlet>
-    <servlet-name>ListServlet</servlet-name>
-    <servlet-class>reward.servlet.ListServlet</servlet-class>
+    <servlet-name>UpdateRecordServlet</servlet-name>
+    <servlet-class>reward.servlet.UpdateRecordServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ListServlet</servlet-name>
-    <url-pattern>/list</url-pattern>
+    <servlet-name>UpdateRecordServlet</servlet-name>
+    <url-pattern>/UpdateRecord</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminContestServlet</servlet-name>
+    <servlet-class>reward.servlet.AdminContestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminContestServlet</servlet-name>
+    <url-pattern>/ac</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CreateContestServlet</servlet-name>
+    <servlet-class>reward.servlet.CreateContestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateContestServlet</servlet-name>
+    <url-pattern>/CreateContest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListContestServlet</servlet-name>
+    <servlet-class>reward.servlet.ListContestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListContestServlet</servlet-name>
+    <url-pattern>/Contests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListTeamerServlet</servlet-name>
+    <servlet-class>reward.servlet.ListTeamerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListTeamerServlet</servlet-name>
+    <url-pattern>/Rank</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>DoLoginServlet</servlet-name>

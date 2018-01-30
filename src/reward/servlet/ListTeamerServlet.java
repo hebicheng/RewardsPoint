@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import reward.biz.ListTeamerBiz;
 import reward.biz.impl.ListTeamerBizImpl;
@@ -18,15 +17,14 @@ import reward.entity.Teamer;
  * Servlet implementation class List
  */
 @WebServlet("/List")
-public class ListServlet extends HttpServlet {
+public class ListTeamerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListServlet() {
+    public ListTeamerServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -49,7 +47,6 @@ public class ListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

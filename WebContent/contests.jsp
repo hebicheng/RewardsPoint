@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
 	<!--bootstrap-->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -61,39 +60,30 @@
 		</div>
 	</nav>
 	
-	<div class="container">
-		<div class="card">
-			<div class="card-body">
-				<h2>SICNU ACM Team Reward Point List</h2>
-				<table class="table table-striped">
-					<thead>
+	<div class="card w-75 mx-auto">
+		<div class="card-body">
+			<div class="row">
+		  		<h2>Contests</h2>
+			</div>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:set var="index" value="1"></c:set>
+					<c:forEach var="contest" items="${contests}">
 						<tr>
-							<th>#</th>
-							<th>name</th>
-							<th>Grade</th>
-							<th>SICNUOJ</th>
-							<th>Codeforces</th>
-							<th>Atcoder</th>
-							<th>Reward Point</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:set var="index" value="1"></c:set>
-						<c:forEach var="data" items="${data}">
-							<tr>
 							<td>${index}</td>
-							<td>${data.name}</td>
-							<td>${data.grade}</td>
-							<td><a href="https://acm.sicnu.edu.cn/user-home?username=${data.sicnuoj}">${data.sicnuoj}</a></td>
-							<td><a href="http://codeforces.com/profile/${data.cf}">${data.cf}</a></td>
-							<td><a href="http://atcoder.jp/user/${data.atcoder}">${data.atcoder}</a></td>
-							<td>${data.point}</td>
+							<td><a href="ac?id=${contest.id }">${contest.name}</a></td>
 							<c:set var="index" value="${index+1}" ></c:set>
 						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>
