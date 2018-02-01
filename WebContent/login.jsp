@@ -23,7 +23,7 @@
 	<body>
 		<div class="card container loginbox" >
 			<div class="card-head">
-				<h2>Admin Login</h2>
+				<h2>Login</h2>
 			</div>
 		  	<div class="card-body">
 		  		<form class="form-horizontal" id="loginForm" method="post" action="dologin" role="form">

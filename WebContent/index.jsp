@@ -39,7 +39,7 @@
 			<c:choose>
 				<c:when test="${empty name }">
 					<!-- 未登录 -->
-					<a href="login.jsp">
+					<a href="login">
 						<button type="button" class="btn btn-outline-secondary btn-sm">Login </button>
 					</a>
 				</c:when>

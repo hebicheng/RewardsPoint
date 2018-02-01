@@ -54,7 +54,7 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 					int grade = rs.getInt("grade");
 					double point = rs.getDouble("point");
 					String sicnuoj = rs.getString("sicnuoj");
-					String cf = rs.getString("cf");
+				 	String cf = rs.getString("cf");
 					String atcoder = rs.getString("atcoder");
 					Teamer teamer = new Teamer(name, grade,sicnuoj,cf,atcoder,point);
 					teamers.add(teamer);
