@@ -19,9 +19,47 @@
 	<script src="js/adminContest.js" type="text/javascript"></script>
 	<script src="js/adminCheck.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="css/admin.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<title>${contest.name }</title>
 </head>
 <body>
+	<nav class="navbar navbar-expand-sm main-navigation navbar-light">
+		<div class="container">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="navbar-brand" href="#">SICNU</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link nav-current" href="admin">Rank</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="admin">Contests</a>
+				</li>
+			</ul>
+			<c:choose>
+				<c:when test="${empty admin }">
+					<!-- 未登录 -->
+					<a href="login.jsp">
+						<button type="button" class="btn btn-outline-secondary btn-sm">Login </button>
+					</a>
+				</c:when>
+				<c:otherwise>
+					<!-- 登录成功 -->
+					<!-- <li class="nav-item">
+						<img src="img/avatar.gif" class="rounded-circle" alt="head" style="width:40px;">
+					</li> -->
+					<div class="dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							${admin }
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="DoLogout">退出登录</a>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</nav>
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
