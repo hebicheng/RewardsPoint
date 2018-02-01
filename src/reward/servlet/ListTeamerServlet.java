@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import reward.biz.ListTeamerBiz;
+import reward.biz.RecordBiz;
 import reward.biz.impl.ListTeamerBizImpl;
+import reward.biz.impl.RecordBizImpl;
 import reward.entity.Teamer;
 
 /**
@@ -35,6 +37,11 @@ public class ListTeamerServlet extends HttpServlet {
 		ListTeamerBiz listTeamerBiz = new ListTeamerBizImpl();
 		Vector<Teamer> data = listTeamerBiz.ListAllTeamers();
 		if (data!= null){
+			RecordBiz recordBiz = new RecordBizImpl();
+			for(Teamer teamer: data) {
+				double point = recordBiz.getPointByTeamer(teamer);
+				teamer.setPoint(point);
+			}
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
