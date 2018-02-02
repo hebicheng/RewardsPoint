@@ -1,41 +1,58 @@
 package reward.entity;
 
 public class Record {
-	private String teamer;
+	private String name;
+	private String username;
 	private String contest;
 	private int ac;
 	private int rank;
 	private int onlyAC;
 	private int fb;
+	private String updateTime; 
 	boolean isUpdate;
-	public Record(String teamer, String contest, int ac, int rank, int onlyAC, int fb) {
+	public Record(String username,String name, String contest, int ac, int rank, int onlyAC, int fb, String updateTime) {
 		super();
-		this.teamer = teamer;
+		this.username = username;
+		this.name = name;
 		this.contest = contest;
 		this.ac = ac;
 		this.rank = rank;
 		this.onlyAC = onlyAC;
 		this.fb = fb;
+		this.updateTime = updateTime;
 		this.isUpdate = true;
 	}
-	public Record(String teamer, String contest) {
+	public Record(String username, String name, String contest) {
 		super();
-		this.teamer = teamer;
+		this.username = username;
+		this.name = name;
 		this.contest = contest;
 		this.isUpdate = false;
 	}
 	
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public boolean getIsUpdate() {
 		return isUpdate;
 	}
 	public void setUpdate(boolean isUpdate) {
 		this.isUpdate = isUpdate;
 	}
-	public String getTeamer() {
-		return teamer;
+	public String getName() {
+		return name;
 	}
-	public void setTeamer(String teamer) {
-		this.teamer = teamer;
+	public void setName(String teamer) {
+		this.name = teamer;
 	}
 	public String getContest() {
 		return contest;

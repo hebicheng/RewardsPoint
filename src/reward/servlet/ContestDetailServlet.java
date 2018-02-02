@@ -10,21 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import reward.biz.RecordBiz;
+import reward.biz.impl.RecordBizImpl;
 import reward.dao.ContestDao;
 import reward.dao.impl.ContestDaoImpl;
 import reward.entity.Contest;
+import reward.entity.Record;
 
 /**
- * Servlet implementation class AdminServlet
+ * Servlet implementation class AdminContestServlet
  */
-@WebServlet("/AdminServlet")
-public class AdminServlet extends HttpServlet {
+@WebServlet("/AdminContestServlet")
+public class ContestDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminServlet() {
+    public ContestDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,34 +36,26 @@ public class AdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		/*request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		String name = request.getParameter("name");
-		String userName = (String)session.getAttribute("admin");
-		// 用户名失效
-		if(userName == null) {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();  
+		if(session.getAttribute("type") == null){
 			response.sendRedirect("login");
-			return ;
+			return;
 		}
+		String idString = request.getParameter("id");
+		int id = Integer.parseInt(idString);
 		ContestDao contestDao = new ContestDaoImpl();
-		Vector<Contest> data = contestDao.getAllContests();
-		if (data!= null){
-			request.setAttribute("contests", data);
-//			request.getRequestDispatcher("contest.jsp").forward(request, response);
-//			return;
+		Contest contest = contestDao.findContestById(id);
+		if(contest == null) {
+			System.out.println("Contest not find.");
 		}
-//		ListTeamerBiz listTeamerBiz = new ListTeamerBizImpl();
-//		Vector<Teamer> teamers = listTeamerBiz.ListAllTeamers();
-//		request.setAttribute("teamers", teamers);
-//		if (name == null) {
-//			request.setAttribute("selectteamer", teamers.firstElement());
-//		}else{
-//			Teamer teamer = new TeamerDaoImpl().findTeamerByName(name);
-//			request.setAttribute("selectteamer", teamer);
-//		}
-*/		
-		request.getRequestDispatcher("adminlogin.jsp").forward(request, response);
+		RecordBiz recordBiz = new RecordBizImpl();
+		Vector<Record> data = recordBiz.listRecordBycontest(contest.getName());
+		if (data!= null){
+			request.setAttribute("data", data);
+		}
+		request.setAttribute("contest", contest);
+		request.getRequestDispatcher("contestdetail.jsp").forward(request, response);
 	}
 
 	/**

@@ -15,7 +15,6 @@
     <servlet-class>reward.servlet.InitServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  
   <servlet>
     <servlet-name>UpdateRecordServlet</servlet-name>
     <servlet-class>reward.servlet.UpdateRecordServlet</servlet-class>
@@ -25,12 +24,12 @@
     <url-pattern>/UpdateRecord</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AdminContestServlet</servlet-name>
-    <servlet-class>reward.servlet.AdminContestServlet</servlet-class>
+    <servlet-name>ContestDetailServlet</servlet-name>
+    <servlet-class>reward.servlet.ContestDetailServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminContestServlet</servlet-name>
-    <url-pattern>/ac</url-pattern>
+    <servlet-name>ContestDetailServlet</servlet-name>
+    <url-pattern>/contest</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CreateContestServlet</servlet-name>
@@ -65,6 +64,14 @@
     <url-pattern>/dologin</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DoAdminLoginServlet</servlet-name>
+    <servlet-class>reward.servlet.DoAdminLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoAdminLoginServlet</servlet-name>
+    <url-pattern>/doadminlogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>reward.servlet.LoginServlet</servlet-class>
   </servlet>
@@ -79,6 +86,14 @@
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DoLogoutServlet</servlet-name>
+    <servlet-class>reward.servlet.DoLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoLogoutServlet</servlet-name>
+    <url-pattern>/dologout</url-pattern>
   </servlet-mapping>
   <context-param>
     <param-name>sql_dialect</param-name>

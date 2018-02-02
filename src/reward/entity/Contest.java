@@ -6,12 +6,12 @@ public class Contest {
 	private int id;
 	private String name;
 	private String content;
-	private String type;
+	private int type;
 	private int weight;
 	private Date time;
 	private String oj;
 	private String url;
-	public Contest(String name, String content, String type, int weight, Date time, String oj, String url) {
+	public Contest(String name, String content, int type, int weight, Date time, String oj, String url) {
 		super();
 		this.name = name;
 		this.content = content;
@@ -21,7 +21,7 @@ public class Contest {
 		this.oj = oj;
 		this.url = url;
 	}
-	public Contest(int id, String name, String content, String type, int weight, Date time, String oj, String url) {
+	public Contest(int id, String name, String content, int type, int weight, Date time, String oj, String url) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -50,10 +50,10 @@ public class Contest {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public int getWeight() {

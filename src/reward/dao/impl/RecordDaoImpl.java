@@ -1,20 +1,24 @@
 package reward.dao.impl;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import reward.dao.BaseDao;
 import reward.dao.RSProcessor;
 import reward.dao.RecordDao;
+import reward.entity.CurrentTime;
 import reward.entity.Record;
 
 public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 	@Override
-	public Record findRecordByTeamerAndContest(String name, String contest) {
-		String sql = "select * from record where teamer = ? and contest = ?";
-		Object[] params = { name };
+	public Record findRecordByTeamerAndContest(String username, String contest) {
+		String sql = "select * from record where username = ? and contest = ?";
+		Object[] params = { username, contest };
 
 		RSProcessor findTeamerByNameProcessor = new RSProcessor() {
 
@@ -23,14 +27,15 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 				if (rs != null) {
 					if (rs.next()) {
-						String teamer = rs.getString("teamer");
+						String username = rs.getString("username");
+						String name = rs.getString("name");
 						String contest = rs.getString("contest");
 						int ac = rs.getInt("ac");
 						int rank = rs.getInt("rank");
 						int onlyAC = rs.getInt("onlyAC");
 						int fb = rs.getInt("fb");
-						
-						record = new Record(teamer, contest, ac, rank, onlyAC, fb);
+						String updateTime = rs.getString("updateTime");
+						record = new Record(username, name, contest, ac, rank, onlyAC, fb, updateTime);
 					}
 				}
 
@@ -43,32 +48,32 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 	@Override
 	public int insert(Record record) {
-		String sql = "insert record (teamer, contest, ac, rank, onlyAC, fb) values(?,?,?,?,?,?)";
-		Object[] params = { record.getTeamer(), record.getContest(), record.getAc(),
-				record.getRank(), record.getOnlyAC(), record.getFb()};
+		String sql = "insert record (username, name, contest, ac, rank, onlyAC, fb, updateTime) values(?,?,?,?,?,?,?,?)";
+		Object[] params = { record.getUsername(),record.getName(), record.getContest(), record.getAc(),
+				record.getRank(), record.getOnlyAC(), record.getFb(), new CurrentTime().getDateString()};
 		return this.executeUpdate(sql, params);
 	}
 
 	@Override
 	public int update(Record record) {
-		String sql = "update record set ac=?,rank=?,onlyAC=?, fb=? where teamer=? and contest=?";
-		Object[] params = { record.getAc(), record.getRank(), record.getOnlyAC(),
-				 record.getFb(), record.getTeamer(), record.getContest() };
+		String sql = "update record set ac=?,rank=?,onlyAC=?, fb=?, updateTime=? where username=? and contest=?";
+		Object[] params = { record.getAc(), record.getRank(), record.getOnlyAC(),record.getFb(), 
+							new CurrentTime().getDateString(), record.getUsername(), record.getContest() };
 		return this.executeUpdate(sql, params);
 	}
 
 	@Override
 	public int delete(Record record) {
-		String sql = "delete from record where teamer=? and contest=?";
-		Object[] params = { record.getTeamer(), record.getContest() };
+		String sql = "delete from record where username=? and contest=?";
+		Object[] params = { record.getUsername(), record.getContest() };
 		return this.executeUpdate(sql, params);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Vector<Record> findRecordsByTeamer(String name) {
-		String sql = "select * from record where teamer = ?";
-		Object[] params = { name };
+	public Vector<Record> findRecordsByTeamer(String username) {
+		String sql = "select * from record where username = ?";
+		Object[] params = { username };
 
 		RSProcessor getAllUsersProcessor = new RSProcessor() {
 
@@ -76,14 +81,16 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 				Vector<Record> records = new Vector<Record>();
 
 				while (rs.next()) {
-					String teamer = rs.getString("teamer");
+					String username = rs.getString("username");
+					String name = rs.getString("name");
 					String contest = rs.getString("contest");
 					int ac = rs.getInt("ac");
 					int rank = rs.getInt("rank");
 					int onlyAC = rs.getInt("onlyAC");
 					int fb = rs.getInt("fb");
+					String updateTime = rs.getString("updateTime");
 					
-					Record record = new Record(teamer, contest, ac, rank, onlyAC, fb);
+					Record record = new Record(username, name, contest, ac, rank, onlyAC, fb, updateTime);
 					records.add(record);
 				}
 				return records;

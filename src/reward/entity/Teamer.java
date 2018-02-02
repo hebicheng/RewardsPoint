@@ -2,11 +2,20 @@ package reward.entity;
 
 public class Teamer {
 	private String name;
+	private String username;
+	private String password;
 	private int grade;
+	
 	private String sicnuoj;
 	private String cf;
 	private String atcoder;
 	private double point;
+	
+	public Teamer(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 	
 	public Teamer(String name, int grade, double point) {
 		super();
@@ -14,8 +23,10 @@ public class Teamer {
 		this.grade = grade;
 		this.point = point;
 	}
-	public Teamer(String name, int grade, String sicnuoj, String cf, String atcoder, double point) {
+	
+	public Teamer(String username, String name, int grade, String sicnuoj, String cf, String atcoder, double point) {
 		super();
+		this.username = username;
 		this.name = name;
 		this.grade = grade;
 		this.sicnuoj = sicnuoj;
@@ -23,11 +34,24 @@ public class Teamer {
 		this.atcoder = atcoder;
 		this.point = point;
 	}
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public int getGrade() {
 		return grade;

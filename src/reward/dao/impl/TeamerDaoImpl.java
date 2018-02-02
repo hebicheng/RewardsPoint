@@ -6,6 +6,7 @@ import java.util.Vector;
 import reward.dao.BaseDao;
 import reward.dao.RSProcessor;
 import reward.dao.TeamerDao;
+import reward.entity.Admin;
 import reward.entity.Teamer;
 
 public class TeamerDaoImpl extends BaseDao implements TeamerDao {
@@ -49,14 +50,14 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 
 				while (rs.next()) {
 					
-					
+					String username = rs.getString("username");
 					String name = rs.getString("name");
 					int grade = rs.getInt("grade");
 					double point = rs.getDouble("point");
 					String sicnuoj = rs.getString("sicnuoj");
 				 	String cf = rs.getString("cf");
 					String atcoder = rs.getString("atcoder");
-					Teamer teamer = new Teamer(name, grade,sicnuoj,cf,atcoder,point);
+					Teamer teamer = new Teamer(username, name, grade,sicnuoj,cf,atcoder,point);
 					teamers.add(teamer);
 				}
 				return teamers;
@@ -92,6 +93,78 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		};
 
 		return (Double) this.executeQuery(getPointByNameProcessor, sql, params);
+	}
+
+	@Override
+	public Teamer findTeamerLoginInfoByUsername(String username) {
+		String sql = "select * from teamer where username = ?";
+		Object[] params = { username };
+
+		RSProcessor findAdminbyUsernameProcessor = new RSProcessor() {
+
+			public Object process(ResultSet rs) throws SQLException {
+				Teamer teamer = null;
+
+				if (rs != null) {
+					if (rs.next()) {
+						String username = rs.getString("username");
+						String password = rs.getString("password");
+						teamer = new Teamer(username, password);
+					}
+				}
+
+				return teamer;
+
+			}
+		};
+
+		return (Teamer) this.executeQuery(findAdminbyUsernameProcessor, sql, params);
+	}
+
+	@Override
+	public int countUserByUsername(String username) {
+		String sql = "select count(*) as user_count from teamer where username=?";
+		Object[] params = {username};
+		
+		RSProcessor countUserByNameProcessor = new RSProcessor(){
+
+			public Object process(ResultSet rs) throws SQLException {
+				int count = 0;
+				if(rs != null) {
+					if(rs.next()) {
+						System.out.println("########");
+						count = rs.getInt("user_count");
+						System.out.println(count);
+					}
+				}
+				
+				return new Integer(count);
+			}
+
+		};
+		
+		return (Integer)this.executeQuery(countUserByNameProcessor, sql, params);
+	}
+
+	@Override
+	public String getTeamerNameByUsername(String username) {
+		String sql = "select name from teamer where username=?";
+		Object[] params = { username };
+
+		RSProcessor getPointByNameProcessor = new RSProcessor() {
+
+			public Object process(ResultSet rs) throws SQLException {
+				String name = null;
+				if (rs != null) {
+					if (rs.next()) {
+					   name = rs.getString("name");
+					}
+				}
+				return name;		
+			}
+		};
+
+		return (String) this.executeQuery(getPointByNameProcessor, sql, params);
 	}
 
 }

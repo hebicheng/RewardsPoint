@@ -18,15 +18,15 @@
 		<link  rel="stylesheet" type="text/css" href="css/login.css">
 		<script src="js/loginCheck.js" type="text/javascript"></script>
 		<meta charset="utf-8">
-		<title>Login</title>
+		<title>Admin Login</title>
 	</head>
 	<body>
 		<div class="card container loginbox" >
 			<div class="card-head">
-				<h2>Login</h2>
+				<h2>Admin Login</h2>
 			</div>
 		  	<div class="card-body">
-		  		<form class="form-horizontal" id="loginForm" method="post" action="dologin" role="form">
+		  		<form class="form-horizontal" id="loginForm" method="post" action="doadminlogin" role="form">
 				    <div class="row">
 				        <div class="col-md-offset-6 col-md-12">
 							<div class="form-group">
@@ -41,7 +41,6 @@
 				        </div>
 				   </div>
 					<div class="modal-footer">
-						<a href="admin">Admin</a>
 						<input type="submit" class="btn btn-primary" value="登录">
 					</div>
 					<c:if test="${not empty message }">

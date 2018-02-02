@@ -42,7 +42,7 @@ public class CreateContestServlet extends HttpServlet {
 			return;
 		}
 		String content = request.getParameter("cContent");
-		String type = "训练赛";
+		int type = 0;
 		String weightString = request.getParameter("cWeight");
 		int weight = Integer.parseInt(weightString);
 		String oj = request.getParameter("cOj");

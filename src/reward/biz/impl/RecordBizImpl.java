@@ -8,6 +8,7 @@ import reward.dao.RecordDao;
 import reward.dao.TeamerDao;
 import reward.dao.impl.RecordDaoImpl;
 import reward.dao.impl.TeamerDaoImpl;
+import reward.entity.CurrentTime;
 import reward.entity.Record;
 import reward.entity.Teamer;
 
@@ -20,9 +21,9 @@ public class RecordBizImpl implements RecordBiz {
 		TeamerDao teamerDao = new TeamerDaoImpl();
 		Vector<Teamer> teamers = teamerDao.getAllTeamers();
 		for (Teamer teamer : teamers) {
-			Record record = recordDao.findRecordByTeamerAndContest(teamer.getName(), contest);
+			Record record = recordDao.findRecordByTeamerAndContest(teamer.getUsername(), contest);
 			if (record == null) {
-				record = new Record(teamer.getName(), contest);
+				record = new Record(teamer.getUsername(),teamer.getName(), contest);
 				records.add(0, record);
 			} else {
 				records.add(record);
@@ -72,15 +73,16 @@ public class RecordBizImpl implements RecordBiz {
 		 * 2017:1.5
 		 */
 		double k = 0;
-		switch(teamer.getGrade()) {
-		case 2015:
-			k = 1;
+		switch(Integer.parseInt(new CurrentTime().getYearString()) - teamer.getGrade()) {
+		case 0:
+		case 1:
+			k = 1.5;
 			break;
-		case 2016:
+		case 2:
 			k = 1.25;
 			break;
-		case 2017:
-			k = 1.5;
+		case 3:
+			k = 1;
 			break;
 		}
 		double point = (0.4*t+0.3*c+0.2*p+0.1*d)*k;

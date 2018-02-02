@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.xml.internal.bind.v2.runtime.Name;
+
 import reward.biz.RecordBiz;
 import reward.biz.impl.RecordBizImpl;
+import reward.entity.CurrentTime;
 import reward.entity.Record;
 
 /**
@@ -31,7 +34,8 @@ public class UpdateRecordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String teamer = request.getParameter("teamer");
+		String username = request.getParameter("username");
+		String name = request.getParameter("name");
 		String contest = request.getParameter("contest");
 		int id = Integer.parseInt(request.getParameter("id"));
 		int ac = Integer.parseInt(request.getParameter("ac"));
@@ -39,10 +43,10 @@ public class UpdateRecordServlet extends HttpServlet {
 		int onlyAC = Integer.parseInt(request.getParameter("onlyAC"));
 		int fb = Integer.parseInt(request.getParameter("fb"));
 		System.out.println("UpdateRecordServlet");
-		Record record = new Record(teamer, contest, ac, rank, onlyAC, fb);
+		Record record = new Record(username, name, contest, ac, rank, onlyAC, fb, new CurrentTime().getDateString());
 		RecordBiz recordBiz = new RecordBizImpl();
 		recordBiz.updateRecord(record);
-		response.sendRedirect("ac?id="+id);
+		response.sendRedirect("contest?id="+id);
 	}
 
 	/**

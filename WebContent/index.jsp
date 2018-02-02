@@ -35,9 +35,23 @@
 				<li class="nav-item">
 					<a class="nav-link" href="Contests">Contests</a>
 				</li>
+				<c:choose>
+					<c:when test="${type == 0}">
+						<li class="nav-item">
+							<a class="nav-link" href="#">Teamer</a>
+						</li>
+					</c:when>
+				</c:choose>
+				<c:choose>
+					<c:when test="${type == 1}">
+						<li class="nav-item">
+							<a class="nav-link" href="#">Mine</a>
+						</li>
+					</c:when>
+				</c:choose>
 			</ul>
 			<c:choose>
-				<c:when test="${empty name }">
+				<c:when test="${empty type }">
 					<!-- 未登录 -->
 					<a href="login">
 						<button type="button" class="btn btn-outline-secondary btn-sm">Login </button>
@@ -45,17 +59,20 @@
 				</c:when>
 				<c:otherwise>
 					<!-- 登录成功 -->
-					<li class="nav-item">
-						<img src="img/avatar.gif" class="rounded-circle" alt="head" style="width:40px;">
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-							${name }
-						</a>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="DoLogout">退出登录</a>
-						</div>
-					</li>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<img src="img/avatar.gif" class="rounded-circle" alt="head" style="width:40px;">
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+								${user}
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="dologout">Logout</a>
+							</div>
+						</li>
+					</ul>
+					
 				</c:otherwise>
 			</c:choose>
 		</div>

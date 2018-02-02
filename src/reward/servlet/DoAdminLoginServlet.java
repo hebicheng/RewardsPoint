@@ -1,32 +1,27 @@
 package reward.servlet;
 
 import java.io.IOException;
-import java.util.Vector;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import reward.biz.RecordBiz;
-import reward.biz.impl.RecordBizImpl;
-import reward.dao.ContestDao;
-import reward.dao.impl.ContestDaoImpl;
-import reward.entity.Contest;
-import reward.entity.Record;
+import reward.biz.LoginBiz;
+import reward.biz.impl.LoginBizImpl;
 
 /**
- * Servlet implementation class AdminContestServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/AdminContestServlet")
-public class AdminContestServlet extends HttpServlet {
+@WebServlet("/DoAdminLoginServlet")
+public class DoAdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminContestServlet() {
+    public DoAdminLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +30,27 @@ public class AdminContestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		
-		System.out.println("AdminContestServlet:");
-		
-		String idString = request.getParameter("id");
-		int id = Integer.parseInt(idString);
-		ContestDao contestDao = new ContestDaoImpl();
-		Contest contest = contestDao.findContestById(id);
-		if(contest == null) {
-			System.out.println("没找到比赛");
+		HttpSession session = request.getSession();
+		String username = request.getParameter("userName");
+		String password = request.getParameter("pwd");
+		LoginBiz loginBiz = new LoginBizImpl();
+		int status = loginBiz.adminLogin(username, password);
+		if(status == 0){
+			session.setAttribute("type", 0);
+			session.setAttribute("user", "admin");
+			response.sendRedirect("Rank");
+			return;
+		}else if(status == -1){
+			request.setAttribute("message", "Admin用户不存在");
+			request.getRequestDispatcher("admin").forward(request, response);
+			return;
+		}else {
+			request.setAttribute("message", "密码错误");
+			request.getRequestDispatcher("admin").forward(request, response);
+			return;
 		}
-		RecordBiz recordBiz = new RecordBizImpl();
-		Vector<Record> data = recordBiz.listRecordBycontest(contest.getName());
-		if (data!= null){
-			request.setAttribute("data", data);
-		}
-		request.setAttribute("contest", contest);
-		request.getRequestDispatcher("auth/adminContest.jsp").forward(request, response);
 	}
 
 	/**

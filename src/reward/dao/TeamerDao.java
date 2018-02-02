@@ -10,5 +10,8 @@ public interface TeamerDao {
 
 	public int modifyPointByName(String name, double score);
 	public Double getPointByName(String name);
+	public Teamer findTeamerLoginInfoByUsername(String username);
+	public int countUserByUsername(String username);
+	public String getTeamerNameByUsername(String username);
 
 }

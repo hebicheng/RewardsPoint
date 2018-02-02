@@ -27,7 +27,7 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 						int id = rs.getInt("id");
 						String name = rs.getString("name");
 						String content = rs.getString("content");
-						String type = rs.getString("type");
+						int type = rs.getInt("type");
 						int weight = rs.getInt("weight");
 						Date time = rs.getDate("time");
 						String oj = rs.getString("oj");
@@ -59,7 +59,7 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 						int id = rs.getInt("id");
 						String name = rs.getString("name");
 						String content = rs.getString("content");
-						String type = rs.getString("type");
+						int type = rs.getInt("type");
 						int weight = rs.getInt("weight");
 						Date time = rs.getDate("time");
 						String oj = rs.getString("oj");
@@ -91,7 +91,7 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String content = rs.getString("content");
-					String type = rs.getString("type");
+					int type = rs.getInt("type");
 					int weight = rs.getInt("weight");
 					Date time = rs.getDate("time");
 					String oj = rs.getString("oj");
