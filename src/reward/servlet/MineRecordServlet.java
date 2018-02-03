@@ -1,6 +1,8 @@
 package reward.servlet;
 
 import java.io.IOException;
+import java.util.Vector;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,24 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.xml.internal.bind.v2.runtime.Name;
-
 import reward.biz.RecordBiz;
 import reward.biz.impl.RecordBizImpl;
-import reward.entity.CurrentTime;
+import reward.dao.ContestDao;
+import reward.dao.impl.ContestDaoImpl;
+import reward.entity.Contest;
 import reward.entity.Record;
 
 /**
- * Servlet implementation class UpdateRecordServlet
+ * Servlet implementation class MineRecordServlet
  */
-@WebServlet("/UpdateRecordServlet")
-public class UpdateRecordServlet extends HttpServlet {
+@WebServlet("/MineRecordServlet")
+public class MineRecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateRecordServlet() {
+    public MineRecordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +36,19 @@ public class UpdateRecordServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();  
 		if(session.getAttribute("type") == null){
 			response.sendRedirect("login");
 			return;
 		}
-		String username = request.getParameter("username");
-		String name = request.getParameter("name");
-		String contest = request.getParameter("contest");
-		int id = Integer.parseInt(request.getParameter("id"));
-		int ac = Integer.parseInt(request.getParameter("ac"));
-		int rank = Integer.parseInt(request.getParameter("rank"));
-		int onlyAC = Integer.parseInt(request.getParameter("onlyAC"));
-		int fb = Integer.parseInt(request.getParameter("fb"));
-		System.out.println("UpdateRecordServlet");
-		Record record = new Record(username, name, contest, ac, rank, onlyAC, fb, new CurrentTime().getDateString());
+		
 		RecordBiz recordBiz = new RecordBizImpl();
-		recordBiz.updateRecord(record);
-		response.sendRedirect("contest?id="+id);
+		Vector<Record> data = recordBiz.getRecordsByUsername((String) session.getAttribute("username"));
+		if (data!= null){
+			request.setAttribute("data", data);
+		}
+		request.getRequestDispatcher("mine.jsp").forward(request, response);
+		
 	}
 
 	/**

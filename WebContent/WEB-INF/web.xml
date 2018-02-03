@@ -95,6 +95,30 @@
     <servlet-name>DoLogoutServlet</servlet-name>
     <url-pattern>/dologout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MineRecordServlet</servlet-name>
+    <servlet-class>reward.servlet.MineRecordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MineRecordServlet</servlet-name>
+    <url-pattern>/record</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AccountServlet</servlet-name>
+    <servlet-class>reward.servlet.AccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountServlet</servlet-name>
+    <url-pattern>/account</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ChangePasswordServlet</servlet-name>
+    <servlet-class>reward.servlet.ChangePasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangePasswordServlet</servlet-name>
+    <url-pattern>/changepwd</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>sql_dialect</param-name>
     <param-value>mysql</param-value>

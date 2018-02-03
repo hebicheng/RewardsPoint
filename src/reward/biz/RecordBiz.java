@@ -7,7 +7,7 @@ import reward.entity.Teamer;
 
 public interface RecordBiz {
 	Vector<Record> listRecordBycontest(String contest);
-	
+	Vector<Record> getRecordsByUsername(String username);
 	boolean updateRecord(Record record);
 	
 	double getPointByTeamer(Teamer teamer);

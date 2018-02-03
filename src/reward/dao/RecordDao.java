@@ -7,7 +7,7 @@ import reward.entity.Record;
 public interface RecordDao {
 	public Record findRecordByTeamerAndContest(String name, String contest);
 	public Vector<Record> findRecordsByTeamer(String name);
-	
+	public Vector<Record> getRecordsByUsername(String username);
 	public int insert(Record record);
 	public int update(Record record);
 	public int deleteRecordByTeamerAndContest(String userName, String contest);

@@ -36,64 +36,82 @@ CREATE TABLE IF NOT EXISTS `contest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
   `content` text COLLATE utf8_bin,
-  `type` varchar(50) COLLATE utf8_bin NOT NULL,
+  `type` int(11) NOT NULL COMMENT '0：训练赛，1：个人赛',
   `weight` int(11) NOT NULL,
   `time` date NOT NULL,
   `oj` varchar(50) COLLATE utf8_bin NOT NULL,
   `url` varchar(300) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- 正在导出表  reward.contest 的数据：~0 rows (大约)
+-- 正在导出表  reward.contest 的数据：~2 rows (大约)
 DELETE FROM `contest`;
 /*!40000 ALTER TABLE `contest` DISABLE KEYS */;
 INSERT INTO `contest` (`id`, `name`, `content`, `type`, `weight`, `time`, `oj`, `url`) VALUES
-	(1, '2018 蓝桥杯省赛 B 组模拟赛（一）', '无', '训练赛', 1, '2018-01-29', '计蒜客', 'https://www.jisuanke.com/contest/990');
+	(2, 'test', 'test', 0, 1, '2018-02-03', 'test', 'test'),
+	(5, 'codeforces#2018.1', 'codeforces#2018.1', 1, 1, '2018-02-03', 'codeforces', 'http://codeforces.com/');
 /*!40000 ALTER TABLE `contest` ENABLE KEYS */;
+
+-- 导出  表 reward.partition_point 结构
+CREATE TABLE IF NOT EXISTS `partition_point` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `trainContest` double NOT NULL DEFAULT '0' COMMENT '训练赛比赛',
+  `personContest` double NOT NULL DEFAULT '0' COMMENT '个人赛',
+  `solveProblem` double NOT NULL DEFAULT '0' COMMENT '刷题',
+  `attendance` double NOT NULL DEFAULT '0' COMMENT '考勤',
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- 正在导出表  reward.partition_point 的数据：~1 rows (大约)
+DELETE FROM `partition_point`;
+/*!40000 ALTER TABLE `partition_point` DISABLE KEYS */;
+/*!40000 ALTER TABLE `partition_point` ENABLE KEYS */;
 
 -- 导出  表 reward.record 结构
 CREATE TABLE IF NOT EXISTS `record` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `teamer` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `username` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `name` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `contest` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '0:训练赛 1:cf 2:atcoder',
   `ac` int(11) NOT NULL DEFAULT '0',
   `rank` int(11) NOT NULL DEFAULT '0',
   `onlyAC` int(11) NOT NULL DEFAULT '0',
   `fb` int(11) NOT NULL DEFAULT '0',
+  `rating` int(11) NOT NULL DEFAULT '0',
+  `updateTime` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `key` (`teamer`,`contest`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `key` (`username`,`contest`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- 正在导出表  reward.record 的数据：~0 rows (大约)
+-- 正在导出表  reward.record 的数据：~3 rows (大约)
 DELETE FROM `record`;
 /*!40000 ALTER TABLE `record` DISABLE KEYS */;
-INSERT INTO `record` (`id`, `teamer`, `contest`, `ac`, `rank`, `onlyAC`, `fb`) VALUES
-	(1, '杨苗', '2018 蓝桥杯省赛 B 组模拟赛（一）', 10, 1, 10, 10);
 /*!40000 ALTER TABLE `record` ENABLE KEYS */;
 
 -- 导出  表 reward.teamer 结构
 CREATE TABLE IF NOT EXISTS `teamer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL,
+  `password` varchar(50) COLLATE utf8_bin NOT NULL,
   `name` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `grade` int(11) NOT NULL DEFAULT '0',
   `sicnuoj` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `cf` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `atcoder` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `point` double NOT NULL DEFAULT '0',
-  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `sno` (`username`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- 正在导出表  reward.teamer 的数据：~6 rows (大约)
+-- 正在导出表  reward.teamer 的数据：~2 rows (大约)
 DELETE FROM `teamer`;
 /*!40000 ALTER TABLE `teamer` DISABLE KEYS */;
-INSERT INTO `teamer` (`id`, `name`, `grade`, `sicnuoj`, `cf`, `atcoder`, `point`) VALUES
-	(1, '何壁承', 2015, 'heb1c', 'heb1c__', 'heb1c', 95.3),
-	(3, '史茜茜', 2016, 'sissiall', 'sissiall', '--', 94.2),
-	(4, '康润', 2016, 'kangrrrr', 'kangrrrr', '--', 91.2),
-	(6, '张唯', 2016, '啊啊啊啊啊', 'Afra', '--', 88),
-	(5, '杨苗', 2016, 'YmMm~`', 'YmMm', '--', 87),
-	(2, '邵博超', 2016, 'Dexter0ion', 'ShaoBochao', '--', 91);
+INSERT INTO `teamer` (`id`, `username`, `password`, `name`, `grade`, `sicnuoj`, `cf`, `atcoder`, `point`) VALUES
+	(1, '2015110416', '25d55ad283aa400af464c76d713c07ad', '何壁承', 2015, 'heb1c', 'heb1c__', 'heb1c', 8.56),
+	(2, '2015110435', '25d55ad283aa400af464c76d713c07ad', '任力', 2015, '0', '0', '0', 4.44);
 /*!40000 ALTER TABLE `teamer` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -16,8 +16,9 @@
 
 	<!--local-->
 	<script src="js/ajax.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/mine.css">
+	<script src="js/mine_account.js" type="text/javascript"></script>
 	<meta charset="utf-8">
 	<title>SICNU ACM TEAM</title>
 </head>
@@ -79,37 +80,49 @@
 	</nav>
 	
 	<div class="container">
-		<div class="card">
-			<div class="card-body">
-				<h2>SICNU ACM Team Reward Point List</h2>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>name</th>
-							<th>Grade</th>
-							<th>SICNUOJ</th>
-							<th>Codeforces</th>
-							<th>Atcoder</th>
-							<th>Reward Point</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:set var="index" value="1"></c:set>
-						<c:forEach var="data" items="${data}">
-							<tr>
-							<td>${index}</td>
-							<td>${data.name}</td>
-							<td>${data.grade}</td>
-							<td><a href="https://acm.sicnu.edu.cn/user-home?username=${data.sicnuoj}">${data.sicnuoj}</a></td>
-							<td><a href="http://codeforces.com/profile/${data.cf}">${data.cf}</a></td>
-							<td><a href="http://atcoder.jp/user/${data.atcoder}">${data.atcoder}</a></td>
-							<td>${data.point}</td>
-							<c:set var="index" value="${index+1}" ></c:set>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="list-group" id="sidebar">
+					<a href="record" class="list-group-item " > Records</a>
+					<a href="account" class="list-group-item leftlight"> Account</a>					
+				</div>
+			</div>
+			<div class="card col-sm-10">
+				<div class="card-body">
+					<div class="card">
+						<div class="card-header">
+							<h4>Change password </h4>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<form class="form-horizontal col-sm-6" id="changePWDForm" method="post" action="changepwd" role="form">
+								    <div class="row">
+								        <div class="col-md-offset-6 col-md-12">
+											<div class="form-group">
+												<input type="password" class="form-control" id="newpwd" name="newpwd" placeholder="New password">
+												<i class="fa fa-user"></i>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control" id="repwd" name="repwd" placeholder="Comfirm password">
+												<i class="fa fa-lock"></i>
+												<!--<a href="#" class="fa fa-question-circle"></a>-->
+											</div>
+								        </div>
+								   </div>
+									<div class="modal-footer">
+										<input type="submit" class="btn btn-primary" value="Submit">
+									</div>
+									<c:if test="${not empty message }">
+										<div class="alert alert-success" id="cpwdMessage">
+											<strong>${message }</strong>
+										</div>	
+									</c:if>
+								</form>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

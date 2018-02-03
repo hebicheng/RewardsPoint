@@ -15,6 +15,7 @@
 
 	<!--local-->
 	<script src="js/ajax.js"></script>
+	<script src="js/contests.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<meta charset="utf-8">
@@ -44,7 +45,7 @@
 				<c:choose>
 					<c:when test="${type == 1}">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Mine</a>
+							<a class="nav-link" href="record">Mine</a>
 						</li>
 					</c:when>
 				</c:choose>
@@ -131,21 +132,38 @@
 					      	<label for="cContent">说明:</label>
 					      	<textarea class="form-control" rows="5" id="cContent" name="cContent"></textarea>
 					    </div>
-					    
 					    <div class="form-group">
-							<label for="cWeight">比赛权重:</label>
-    						<input type="text" class="form-control" id="cWeight" name="cWeight" value="1">
+							<label for="cType">比赛类型:</label>
+					      	<select class="form-control" id="cType" name="cType">
+					        	<option value="0">训练赛</option>
+					        	<option value="1">个人赛</option>
+					      	</select>
 						</div>
-						
-						<div class="form-group">
-							<label for="cOj">oj:</label>
-    						<input type="text" class="form-control" id="cOj" name="cOj">
+						<div class="trainContest">
+							<div class="form-group">
+								<label for="cWeight">比赛权重:</label>
+	    						<input type="text" class="form-control" id="cWeight" name="cWeight" value="1">
+							</div>
+							
+							<div class="form-group">
+								<label for="cOj">oj:</label>
+	    						<input type="text" class="form-control" id="cOj" name="cOj">
+							</div>
+							
+							<div class="form-group">
+								<label for="cUrl">地址:</label>
+	    						<input type="text" class="form-control" id="cUrl" name="cUrl">
+							</div>
 						</div>
-						
-						<div class="form-group">
-							<label for="cUrl">地址:</label>
-    						<input type="text" class="form-control" id="cUrl" name="cUrl">
-						</div>
+					    <div class="personContest">
+					    	<div class="form-group">
+								<label for="cOJ">oj:</label>
+						      	<select class="form-control" id="cOJ" name="cOJ">
+						        	<option value="codeforces">codeforces</option>
+						        	<option value="AtCoder">AtCoder</option>
+						      	</select>
+							</div>
+					    </div>
 					</div>
 					<div class="modal-footer">
 						<input type="submit" class="btn btn-info" value="创建" id="mkInbox">
