@@ -56,7 +56,7 @@ public class CreateContestServlet extends HttpServlet {
 		Contest contest = new Contest(name, content, type, weight, time, oj, url);
 		ContestDao contestDao = new ContestDaoImpl();
 		contestDao.insert(contest);
-		response.sendRedirect("Contests");
+		response.sendRedirect("Rank");
 	}
 
 	/**

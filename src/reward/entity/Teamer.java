@@ -1,5 +1,7 @@
 package reward.entity;
 
+import java.text.DecimalFormat;
+
 public class Teamer {
 	private String name;
 	private String username;
@@ -22,6 +24,7 @@ public class Teamer {
 		this.name = name;
 		this.grade = grade;
 		this.point = point;
+		new DecimalFormat("#.0").format(this.point);
 	}
 	
 	public Teamer(String username, String name, int grade, String sicnuoj, String cf, String atcoder, double point) {
@@ -33,6 +36,7 @@ public class Teamer {
 		this.cf = cf;
 		this.atcoder = atcoder;
 		this.point = point;
+		new DecimalFormat("#.0").format(this.point);
 	}
 	
 	public String getUsername() {

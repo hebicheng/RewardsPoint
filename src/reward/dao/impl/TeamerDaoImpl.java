@@ -37,6 +37,33 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 
 		return (Teamer) this.executeQuery(findTeamerByNameProcessor, sql, params);
 	}
+	
+	@Override
+	public Teamer findTeamerByUsername(String name) {
+		String sql = "select * from teamer where username = ?";
+		Object[] params = { name };
+
+		RSProcessor findTeamerByNameProcessor = new RSProcessor() {
+
+			public Object process(ResultSet rs) throws SQLException {
+				Teamer teamer = null;
+
+				if (rs != null) {
+					if (rs.next()) {
+						String name = rs.getString("name");
+						int grade = rs.getInt("grade");
+						double point = rs.getInt("point");
+						teamer = new Teamer(name, grade,point);
+					}
+				}
+
+				return teamer;
+
+			}
+		};
+
+		return (Teamer) this.executeQuery(findTeamerByNameProcessor, sql, params);
+	}
 
 	@Override
 	public Vector<Teamer> getAllTeamers() {
@@ -70,6 +97,13 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 	@Override
 	public int modifyPointByName(String name, double score) {
 		String sql = "update teamer set point=? where name=?";
+		Object[] params = { score, name };
+		return this.executeUpdate(sql, params);
+	}
+	
+	@Override
+	public int modifyPointByUsername(String name, double score) {
+		String sql = "update teamer set point=? where username=?";
 		Object[] params = { score, name };
 		return this.executeUpdate(sql, params);
 	}
