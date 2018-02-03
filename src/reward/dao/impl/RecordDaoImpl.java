@@ -1,11 +1,8 @@
 package reward.dao.impl;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import reward.dao.BaseDao;
 import reward.dao.RSProcessor;
@@ -63,9 +60,9 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 	}
 
 	@Override
-	public int delete(Record record) {
+	public int deleteRecordByTeamerAndContest(String userName, String contest) {
 		String sql = "delete from record where username=? and contest=?";
-		Object[] params = { record.getUsername(), record.getContest() };
+		Object[] params = { userName, contest };
 		return this.executeUpdate(sql, params);
 	}
 

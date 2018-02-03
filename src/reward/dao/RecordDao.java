@@ -10,7 +10,7 @@ public interface RecordDao {
 	
 	public int insert(Record record);
 	public int update(Record record);
-	public int delete(Record record);
+	public int deleteRecordByTeamerAndContest(String userName, String contest);
 	
 	public int countRecordByContest(String contest);
 }
