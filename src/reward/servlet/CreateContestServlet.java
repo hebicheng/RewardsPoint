@@ -47,16 +47,27 @@ public class CreateContestServlet extends HttpServlet {
 			return;
 		}
 		String content = request.getParameter("cContent");
-		int type = 0;
-		String weightString = request.getParameter("cWeight");
-		int weight = Integer.parseInt(weightString);
-		String oj = request.getParameter("cOj");
-		String url = request.getParameter("cUrl");
+		int type = Integer.parseInt(request.getParameter("cType"));
+		int weight = 1;
 		Date time = new Date();
+		String oj, url;
+		if(type == 0) {
+			String weightString = request.getParameter("cWeight");
+			weight = Integer.parseInt(weightString);
+			oj = request.getParameter("cOj");
+			url = request.getParameter("cUrl");
+		} else {
+			oj = request.getParameter("cOJ");
+			if(oj.equals("codeforces")) {
+				url = "http://codeforces.com/";
+			} else {
+				url = "http://atcoder.jp/";
+			}
+		}
 		Contest contest = new Contest(name, content, type, weight, time, oj, url);
 		ContestDao contestDao = new ContestDaoImpl();
 		contestDao.insert(contest);
-		response.sendRedirect("Rank");
+		response.sendRedirect("Contests");
 	}
 
 	/**
