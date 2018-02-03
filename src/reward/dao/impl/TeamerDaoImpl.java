@@ -167,4 +167,12 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		return (String) this.executeQuery(getPointByNameProcessor, sql, params);
 	}
 
+	@Override
+	public int ChangePassword(String username, String password) {
+		String sql = "update teamer set password=? where username=?";
+		Object[] params = { password, username };
+		return this.executeUpdate(sql, params);
+		
+	}
+
 }

@@ -1,5 +1,6 @@
 package reward.biz.impl;
 
+import reward.biz.CreateMD5Password;
 import reward.biz.LoginBiz;
 import reward.dao.AdminDao;
 import reward.dao.TeamerDao;
@@ -12,12 +13,14 @@ public class LoginBizImpl implements LoginBiz{
 
 	TeamerDao teamerDao = new TeamerDaoImpl();
 	AdminDao adminDao = new AdminDaoImpl();
+	CreateMD5Password createMD5Password = new CreateMD5PasswordImpl();
 	@Override
 	public int login(String username, String password) {
 		if (teamerDao.countUserByUsername(username) < 1){
 			return -1;
 		}
 		Teamer teamer = teamerDao.findTeamerLoginInfoByUsername(username);
+		password = createMD5Password.CreatePassword(password);
 		if(teamer.getPassword().equals(password)){
 			return 0;
 		}

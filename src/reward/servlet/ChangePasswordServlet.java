@@ -8,20 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import reward.biz.LoginBiz;
-import reward.biz.impl.LoginBizImpl;
+import javafx.collections.ListChangeListener.Change;
+import reward.biz.ChangePasswordBiz;
+import reward.biz.impl.ChangePasswordBizImpl;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ChangePasswordServlet
  */
-@WebServlet("/DoLoginServlet")
-public class DoLoginServlet extends HttpServlet {
+@WebServlet("/ChangePasswordServlet")
+public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DoLoginServlet() {
+    public ChangePasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +34,18 @@ public class DoLoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		String username = request.getParameter("userName");
-		String password = request.getParameter("pwd");
-		LoginBiz loginBiz = new LoginBizImpl();
-		int status = loginBiz.login(username, password);
-		if(status == 0){
-			session.setAttribute("type", 1);
-			session.setAttribute("user", loginBiz.getNameByUsername(username));
-			session.setAttribute("username", username);
-			response.sendRedirect("Rank");
-			return;
-		}else if(status == -1){
-			request.setAttribute("message", "用户不存在");
-			request.getRequestDispatcher("login").forward(request, response);
-			return;
-		}else {
-			request.setAttribute("message", "密码错误");
-			request.getRequestDispatcher("login").forward(request, response);
+		if(session.getAttribute("type") == null){
+			response.sendRedirect("login");
 			return;
 		}
+		String newpwd = request.getParameter("newpwd");
+		ChangePasswordBiz changePasswordBiz = new ChangePasswordBizImpl();
+		int status = changePasswordBiz.changePassword((String)session.getAttribute("username"), newpwd);
+		if(status == 0){
+			request.setAttribute("message", "Change password success.");
+		}
+		request.getRequestDispatcher("account").forward(request, response);
+		
 	}
 
 	/**

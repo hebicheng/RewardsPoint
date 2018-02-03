@@ -18,6 +18,7 @@
 	<script src="js/ajax.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/mine.css">
 	<meta charset="utf-8">
 	<title>SICNU ACM TEAM</title>
 </head>
@@ -79,37 +80,59 @@
 	</nav>
 	
 	<div class="container">
-		<div class="card">
-			<div class="card-body">
-				<h2>SICNU ACM Team Reward Point List</h2>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>name</th>
-							<th>Grade</th>
-							<th>SICNUOJ</th>
-							<th>Codeforces</th>
-							<th>Atcoder</th>
-							<th>Reward Point</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:set var="index" value="1"></c:set>
-						<c:forEach var="data" items="${data}">
-							<tr>
-							<td>${index}</td>
-							<td>${data.name}</td>
-							<td>${data.grade}</td>
-							<td><a href="https://acm.sicnu.edu.cn/user-home?username=${data.sicnuoj}">${data.sicnuoj}</a></td>
-							<td><a href="http://codeforces.com/profile/${data.cf}">${data.cf}</a></td>
-							<td><a href="http://atcoder.jp/user/${data.atcoder}">${data.atcoder}</a></td>
-							<td>${data.point}</td>
-							<c:set var="index" value="${index+1}" ></c:set>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+		<div class="row">
+			<div class=" col-sm-2">
+				<div class="list-group" id="sidebar">
+					<a href="record" class="list-group-item leftlight" > Records</a>
+					<a href="account" class="list-group-item"> Account</a>					
+				</div>
+			</div>
+			<div class="card col-sm-10">
+				<c:choose>
+					<c:when test="${empty data }">
+						<div class="card-body">
+							no record.
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="card-body">
+							
+								<c:forEach var="data" items="${data}">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-sm-4">
+												 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
+												 <div class="badge badge-pill badge-info">${data.contest}</div>
+											</div>
+											<div class="col-sm-2">
+												 <button type="button" class="btn btn-primary">
+												 	Rank <span class="badge badge-light">${data.rank}</span>
+												 </button>
+											</div>
+											<div class="col-sm-2">
+												 <button type="button" class="btn btn-success">
+												 	Accpted <span class="badge badge-light">${data.ac}</span>
+												 </button>
+											</div>
+											<div class="col-sm-2">
+												 <button type="button" class="btn btn-danger">
+												 	First Blood <span class="badge badge-light">${data.fb}</span>
+												 </button>
+											</div>
+											<div class="col-sm-2">
+												 <button type="button" class="btn btn-secondary">
+												 	Sole <span class="badge badge-light">${data.onlyAC}</span>
+												 </button>
+											</div>
+										</div>
+									</div>
+								</div>
+								</c:forEach>
+						</div>
+					
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

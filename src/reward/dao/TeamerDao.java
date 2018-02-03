@@ -13,5 +13,6 @@ public interface TeamerDao {
 	public Teamer findTeamerLoginInfoByUsername(String username);
 	public int countUserByUsername(String username);
 	public String getTeamerNameByUsername(String username);
+	public int ChangePassword(String username, String password);
 
 }

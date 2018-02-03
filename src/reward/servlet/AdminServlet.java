@@ -33,33 +33,7 @@ public class AdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		/*request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		String name = request.getParameter("name");
-		String userName = (String)session.getAttribute("admin");
-		// 用户名失效
-		if(userName == null) {
-			response.sendRedirect("login");
-			return ;
-		}
-		ContestDao contestDao = new ContestDaoImpl();
-		Vector<Contest> data = contestDao.getAllContests();
-		if (data!= null){
-			request.setAttribute("contests", data);
-//			request.getRequestDispatcher("contest.jsp").forward(request, response);
-//			return;
-		}
-//		ListTeamerBiz listTeamerBiz = new ListTeamerBizImpl();
-//		Vector<Teamer> teamers = listTeamerBiz.ListAllTeamers();
-//		request.setAttribute("teamers", teamers);
-//		if (name == null) {
-//			request.setAttribute("selectteamer", teamers.firstElement());
-//		}else{
-//			Teamer teamer = new TeamerDaoImpl().findTeamerByName(name);
-//			request.setAttribute("selectteamer", teamer);
-//		}
-*/		
+		// TODO Auto-generated method stub		
 		request.getRequestDispatcher("adminlogin.jsp").forward(request, response);
 	}
 

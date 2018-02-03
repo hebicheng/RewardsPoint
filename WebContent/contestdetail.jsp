@@ -45,7 +45,7 @@
 				<c:choose>
 					<c:when test="${type == 1}">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Mine</a>
+							<a class="nav-link" href="record">Mine</a>
 						</li>
 					</c:when>
 				</c:choose>

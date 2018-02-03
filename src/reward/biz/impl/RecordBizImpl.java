@@ -95,4 +95,9 @@ public class RecordBizImpl implements RecordBiz {
 		return recordDao.countRecordByContest(contest);
 	}
 
+	@Override
+	public Vector<Record> getRecordsByUsername(String username) {
+		return recordDao.getRecordsByUsername(username);
+	}
+
 }

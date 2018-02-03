@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import reward.dao.ContestDao;
 import reward.dao.impl.ContestDaoImpl;
@@ -34,7 +35,11 @@ public class CreateContestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("type") == null){
+			response.sendRedirect("login");
+			return;
+		}
 		String name = request.getParameter("cName");
 		if(name == null || name.trim().equals("")) {
 			request.setAttribute("message", "文件夹名不能为空");
@@ -48,11 +53,10 @@ public class CreateContestServlet extends HttpServlet {
 		String oj = request.getParameter("cOj");
 		String url = request.getParameter("cUrl");
 		Date time = new Date();
-		
 		Contest contest = new Contest(name, content, type, weight, time, oj, url);
 		ContestDao contestDao = new ContestDaoImpl();
 		contestDao.insert(contest);
-		response.sendRedirect("admin");
+		response.sendRedirect("Contests");
 	}
 
 	/**

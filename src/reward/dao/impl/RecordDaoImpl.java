@@ -123,4 +123,34 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 		return (Integer) this.executeQuery(countUserByNameProcessor, sql, params);
 	}
 
+	@Override
+	public Vector<Record> getRecordsByUsername(String username) {
+		String sql = "select * from record where username = ?";
+		Object[] params = { username };
+
+		RSProcessor getAllUsersProcessor = new RSProcessor() {
+
+			public Object process(ResultSet rs) throws SQLException {
+				Vector<Record> records = new Vector<Record>();
+
+				while (rs.next()) {
+					String username = rs.getString("username");
+					String name = rs.getString("name");
+					String contest = rs.getString("contest");
+					int ac = rs.getInt("ac");
+					int rank = rs.getInt("rank");
+					int onlyAC = rs.getInt("onlyAC");
+					int fb = rs.getInt("fb");
+					String updateTime = rs.getString("updateTime");
+					
+					Record record = new Record(username, name, contest, ac, rank, onlyAC, fb, updateTime);
+					records.add(record);
+				}
+				return records;
+			}
+		};
+
+		return (Vector<Record>) this.executeQuery(getAllUsersProcessor, sql, params);
+	}
+
 }
