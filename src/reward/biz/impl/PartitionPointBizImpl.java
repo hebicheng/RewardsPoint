@@ -48,6 +48,7 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 
 	private void updateTeamerRecord(PartitionPoint partitionPoint) {
 		TeamerDao teamerDao = new TeamerDaoImpl();
+		System.out.println(partitionPoint.getUsername());
 		Teamer teamer = teamerDao.findTeamerByUsername(partitionPoint.getUsername());
 		double t = partitionPoint.getTrainContest();
 		double c = partitionPoint.getPersonContest();

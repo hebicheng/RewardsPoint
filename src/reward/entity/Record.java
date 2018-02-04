@@ -71,9 +71,9 @@ public class Record {
 	public void calcScore() {
 		double t = 0;
 		if (type == 1) {  // cf
-			t = (this.rating-1000.0)/40;
+			t = Math.max(0, (this.rating-1000.0)/40);
 		} else if (type == 2) {  // atcoder
-			t = (this.rating-900.0)/80;
+			t = Math.max(0, (this.rating-900.0)/80);
 		} else if (type == 3) {
 			// 考勤
 		}

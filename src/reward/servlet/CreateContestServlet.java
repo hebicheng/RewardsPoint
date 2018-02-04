@@ -1,6 +1,8 @@
 package reward.servlet;
 
 import java.io.IOException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -49,7 +51,10 @@ public class CreateContestServlet extends HttpServlet {
 		String content = request.getParameter("cContent");
 		int type = Integer.parseInt(request.getParameter("cType"));
 		int weight = 1;
-		Date time = new Date();
+		String cTime = request.getParameter("cTime");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	    ParsePosition pos = new ParsePosition(0);
+	    Date time = formatter.parse(cTime, pos);
 		String oj, url;
 		int num;
 		if(type == 0) {
