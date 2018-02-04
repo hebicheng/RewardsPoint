@@ -124,10 +124,10 @@
 										<td>${index}</td>
 										<td>${data.username}</td>
 										<td>${data.name}</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>--</td>
+										<td>--</td>
+										<td>--</td>
+										<td>--</td>
 										<c:if test="${type == 0}">
 											<td><button type="button" class="btn btn-primary btn-sm update" data-toggle="modal" data-target="#Update">&nbsp&nbsp&nbspSet&nbsp&nbsp&nbsp&nbsp</button></td>
 										</c:if>
