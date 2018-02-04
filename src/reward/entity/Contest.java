@@ -11,7 +11,8 @@ public class Contest {
 	private Date time;
 	private String oj;
 	private String url;
-	public Contest(String name, String content, int type, int weight, Date time, String oj, String url) {
+	private int num;
+	public Contest(String name, String content, int type, int weight, Date time, String oj, String url, int num) {
 		super();
 		this.name = name;
 		this.content = content;
@@ -20,8 +21,9 @@ public class Contest {
 		this.time = time;
 		this.oj = oj;
 		this.url = url;
+		this.num = num;
 	}
-	public Contest(int id, String name, String content, int type, int weight, Date time, String oj, String url) {
+	public Contest(int id, String name, String content, int type, int weight, Date time, String oj, String url, int num) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,6 +33,13 @@ public class Contest {
 		this.time = time;
 		this.oj = oj;
 		this.url = url;
+		this.num = num;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public int getId() {
 		return id;

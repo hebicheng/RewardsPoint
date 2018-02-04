@@ -9,7 +9,7 @@ public interface RecordDao {
 	public Vector<Record> findRecordsByTeamer(String name);
 	public Vector<Record> getRecordsByUsername(String username);
 	public int insert(Record record);
-	public int update(Record record);
+//	public int update(Record record);
 	public int deleteRecordByTeamerAndContest(String userName, String contest);
 	
 	public int countRecordByContest(String contest);

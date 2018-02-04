@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import reward.biz.RecordBiz;
+import reward.biz.TeamerBiz;
 import reward.biz.impl.RecordBizImpl;
+import reward.biz.impl.TeamerBizImpl;
 import reward.dao.ContestDao;
 import reward.dao.impl.ContestDaoImpl;
 import reward.entity.Contest;
 import reward.entity.Record;
+import reward.entity.Teamer;
 
 /**
  * Servlet implementation class AdminContestServlet
@@ -50,9 +53,12 @@ public class ContestDetailServlet extends HttpServlet {
 			System.out.println("Contest not find.");
 		}
 		RecordBiz recordBiz = new RecordBizImpl();
-		Vector<Record> data = recordBiz.listRecordBycontest(contest.getName());
-		if (data!= null){
-			request.setAttribute("data", data);
+		Vector<Record> records = recordBiz.listRecordByContest(contest);
+		if (records!= null){
+			TeamerBiz teamerBiz = new TeamerBizImpl();
+			Vector<Teamer> teamers = teamerBiz.listTeamerByRecord(records);
+			request.setAttribute("data", records);
+			request.setAttribute("teamers", teamers);
 		}
 		request.setAttribute("contest", contest);
 		request.getRequestDispatcher("contestdetail.jsp").forward(request, response);

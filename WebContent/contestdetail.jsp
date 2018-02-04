@@ -84,17 +84,28 @@
 				<p class="badge badge-primary">${contest.content }</p>
 				<p class="badge badge-info">${contest.oj }</p>
 				<p class="badge badge-success">${contest.time }</p>
+				<c:if test="${contest.type == 0 }">
+					<p class="badge badge-dark">${contest.num }</p>	
+				</c:if>
 				<p><a href="${contest.url }">${contest.url }</a></p>
 				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>#</th>
 							<th>Username</th>
-							<th>Name</th>
-							<th>Accepted</th>
-							<th>rank</th>
-							<th>Sole</th>
-							<th>First Blood</th>
+							<th>name</th>
+							<c:choose>
+								<c:when test="${contest.type == 0 }">
+									<th>Accepted</th>
+									<th>rank</th>
+									<th>Sole</th>
+									<th>First Blood</th>
+								</c:when>
+								<c:otherwise>
+									<th>Home</th>
+									<th>rating</th>
+								</c:otherwise>
+							</c:choose>
 							<th>Score</th>
 						</tr>
 					</thead>
@@ -106,16 +117,31 @@
 									<tr>
 										<td>${index}</td>
 										<td>${data.username}</td>
-										<td>${data.name}</td>
-										<td>${data.ac}</td>
-										<td>${data.rank }</td>
-										<td>${data.onlyAC }</td>
-										<td>${data.fb}</td>
+										<td>${teamers[index-1].name }</td>
+										<c:choose>
+											<c:when test="${contest.type == 0 }">
+												<td>${data.ac}</td>
+												<td>${data.rank }</td>
+												<td>${data.onlyAC }</td>
+												<td>${data.fb}</td>
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${data.type == 1 }">
+														<td><a href="http://codeforces.com/profile/${teamers[index-1].cf }">${teamers[index-1].cf }</a></td>		
+													</c:when>
+													<c:otherwise>
+														<td><a href="http://atcoder.jp/user/${teamers[index-1].atcoder }">${teamers[index-1].atcoder }</a></td>
+													</c:otherwise>
+												</c:choose>
+												<td>${data.rating}</td>
+											</c:otherwise>
+										</c:choose>
 										<c:if test="${type == 0}">
 											<td><button type="button" class="btn btn-primary btn-sm update" data-toggle="modal" data-target="#Update">Update</button></td>
 										</c:if>
 										<c:if test="${type == 1}">
-											<td>score</td>
+											<td>${data.score }</td>
 										</c:if>
 									</tr>
 								</c:when>
@@ -123,16 +149,31 @@
 									<tr>
 										<td>${index}</td>
 										<td>${data.username}</td>
-										<td>${data.name}</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>${teamers[index-1].name }</td>
+										<c:choose>
+											<c:when test="${contest.type == 0 }">
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${data.type == 1 }">
+														<td><a href="http://codeforces.com/profile/${teamers[index-1].cf }">${teamers[index-1].cf }</a></td>		
+													</c:when>
+													<c:otherwise>
+														<td><a href="http://atcoder.jp/user/${teamers[index-1].atcoder }">${teamers[index-1].atcoder }</a></td>
+													</c:otherwise>
+												</c:choose>
+												<td></td>
+											</c:otherwise>
+										</c:choose>
 										<c:if test="${type == 0}">
 											<td><button type="button" class="btn btn-primary btn-sm update" data-toggle="modal" data-target="#Update">&nbsp&nbsp&nbspSet&nbsp&nbsp&nbsp&nbsp</button></td>
 										</c:if>
 										<c:if test="${type == 1}">
-											<td>--</td>
+											<td>${data.score }</td>
 										</c:if>
 									</tr>
 								</c:otherwise>
@@ -155,29 +196,40 @@
 					</div>
 				
 					<div class="modal-body">
-						<input type="text" name="contest" class="d-none" value="${contest.name }">
-						<input type="text" name="id" class="d-none" value="${contest.id}" />
-						<input type="text" name="username" class="d-none" id="username">
-						<input type="text" name="name" class="d-none" id="name">
-						<div class="form-group">
-							<label for="ac">过题数:</label>
-    						<input type="text" class="form-control" id="ac" name="ac">
-						</div>
-					    
-					    <div class="form-group">
-							<label for="rank">rank:</label>
-    						<input type="text" class="form-control" id="rank" name="rank">
+						<div class="d-none">
+							<input type="text" name="id" value="${contest.id}" />
+							<input type="text" name="username" id="username">
 						</div>
 						
-						<div class="form-group">
-							<label for="onlyAC">唯一AC题数:</label>
-    						<input type="text" class="form-control" id="onlyAC" name="onlyAC">
-						</div>
-						
-						<div class="form-group">
-							<label for="fb">一血题数:</label>
-    						<input type="text" class="form-control" id="fb" name="fb">
-						</div>
+						<c:choose>
+							<c:when test="${contest.type == 0 }">
+								<div class="form-group">
+									<label for="ac">过题数:</label>
+		    						<input type="text" class="form-control" id="ac" name="ac">
+								</div>
+							    
+							    <div class="form-group">
+									<label for="rank">rank:</label>
+		    						<input type="text" class="form-control" id="rank" name="rank">
+								</div>
+								
+								<div class="form-group">
+									<label for="onlyAC">唯一AC题数:</label>
+		    						<input type="text" class="form-control" id="onlyAC" name="onlyAC">
+								</div>
+								
+								<div class="form-group">
+									<label for="fb">一血题数:</label>
+		    						<input type="text" class="form-control" id="fb" name="fb">
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="form-group">
+									<label for="rating">rating:</label>
+		    						<input type="text" class="form-control" id="rating" name="rating">
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					
 					<div class="modal-footer">

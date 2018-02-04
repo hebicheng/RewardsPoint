@@ -3,10 +3,10 @@ package reward.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import reward.dao.BaseDao;
 import reward.dao.RSProcessor;
 import reward.dao.TeamerDao;
-import reward.entity.Admin;
 import reward.entity.Teamer;
 
 public class TeamerDaoImpl extends BaseDao implements TeamerDao {
@@ -26,7 +26,9 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 						String name = rs.getString("name");
 						int grade = rs.getInt("grade");
 						double point = rs.getInt("point");
-						teamer = new Teamer(name, grade,point);
+						String cf = rs.getString("cf");
+						String atcoder = rs.getString("atcoder");
+						teamer = new Teamer(name, grade, point, cf, atcoder);
 					}
 				}
 
@@ -37,7 +39,7 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 
 		return (Teamer) this.executeQuery(findTeamerByNameProcessor, sql, params);
 	}
-	
+
 	@Override
 	public Teamer findTeamerByUsername(String name) {
 		String sql = "select * from teamer where username = ?";
@@ -53,7 +55,9 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 						String name = rs.getString("name");
 						int grade = rs.getInt("grade");
 						double point = rs.getInt("point");
-						teamer = new Teamer(name, grade,point);
+						String cf = rs.getString("cf");
+						String atcoder = rs.getString("atcoder");
+						teamer = new Teamer(name, grade, point, cf, atcoder);
 					}
 				}
 
@@ -65,10 +69,11 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		return (Teamer) this.executeQuery(findTeamerByNameProcessor, sql, params);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Vector<Teamer> getAllTeamers() {
 		String sql = "select * from teamer order by point desc";
-		Object[] params = { };
+		Object[] params = {};
 
 		RSProcessor getAllUsersProcessor = new RSProcessor() {
 
@@ -76,15 +81,15 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 				Vector<Teamer> teamers = new Vector<Teamer>();
 
 				while (rs.next()) {
-					
+
 					String username = rs.getString("username");
 					String name = rs.getString("name");
 					int grade = rs.getInt("grade");
 					double point = rs.getDouble("point");
 					String sicnuoj = rs.getString("sicnuoj");
-				 	String cf = rs.getString("cf");
+					String cf = rs.getString("cf");
 					String atcoder = rs.getString("atcoder");
-					Teamer teamer = new Teamer(username, name, grade,sicnuoj,cf,atcoder,point);
+					Teamer teamer = new Teamer(username, name, grade, sicnuoj, cf, atcoder, point);
 					teamers.add(teamer);
 				}
 				return teamers;
@@ -100,7 +105,7 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		Object[] params = { score, name };
 		return this.executeUpdate(sql, params);
 	}
-	
+
 	@Override
 	public int modifyPointByUsername(String name, double score) {
 		String sql = "update teamer set point=? where username=?";
@@ -119,10 +124,10 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 				double point = 0;
 				if (rs != null) {
 					if (rs.next()) {
-					   point = rs.getDouble("point");
+						point = rs.getDouble("point");
 					}
 				}
-				return point;		
+				return point;
 			}
 		};
 
@@ -158,26 +163,26 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 	@Override
 	public int countUserByUsername(String username) {
 		String sql = "select count(*) as user_count from teamer where username=?";
-		Object[] params = {username};
-		
-		RSProcessor countUserByNameProcessor = new RSProcessor(){
+		Object[] params = { username };
+
+		RSProcessor countUserByNameProcessor = new RSProcessor() {
 
 			public Object process(ResultSet rs) throws SQLException {
 				int count = 0;
-				if(rs != null) {
-					if(rs.next()) {
+				if (rs != null) {
+					if (rs.next()) {
 						System.out.println("########");
 						count = rs.getInt("user_count");
 						System.out.println(count);
 					}
 				}
-				
+
 				return new Integer(count);
 			}
 
 		};
-		
-		return (Integer)this.executeQuery(countUserByNameProcessor, sql, params);
+
+		return (Integer) this.executeQuery(countUserByNameProcessor, sql, params);
 	}
 
 	@Override
@@ -191,10 +196,10 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 				String name = null;
 				if (rs != null) {
 					if (rs.next()) {
-					   name = rs.getString("name");
+						name = rs.getString("name");
 					}
 				}
-				return name;		
+				return name;
 			}
 		};
 
@@ -206,7 +211,7 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		String sql = "update teamer set password=? where username=?";
 		Object[] params = { password, username };
 		return this.executeUpdate(sql, params);
-		
+
 	}
 
 }
