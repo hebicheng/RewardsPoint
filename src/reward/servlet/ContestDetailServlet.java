@@ -1,6 +1,8 @@
 package reward.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 import javax.servlet.ServletException;
@@ -26,22 +28,24 @@ import reward.entity.Teamer;
 @WebServlet("/AdminContestServlet")
 public class ContestDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ContestDetailServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ContestDetailServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();  
-		if(session.getAttribute("type") == null){
+		HttpSession session = request.getSession();
+		if (session.getAttribute("type") == null) {
 			response.sendRedirect("login");
 			return;
 		}
@@ -49,12 +53,19 @@ public class ContestDetailServlet extends HttpServlet {
 		int id = Integer.parseInt(idString);
 		ContestDao contestDao = new ContestDaoImpl();
 		Contest contest = contestDao.findContestById(id);
-		if(contest == null) {
+		if (contest == null) {
 			System.out.println("Contest not find.");
 		}
 		RecordBiz recordBiz = new RecordBizImpl();
 		Vector<Record> records = recordBiz.listRecordByContest(contest);
-		if (records!= null){
+		if (records != null) {
+			Collections.sort(records, new Comparator<Record>() {
+				public int compare(Record left, Record right) {
+					double l = left.getScore();
+					double r = right.getScore();
+					return l < r?1:-1;
+				}
+			});
 			TeamerBiz teamerBiz = new TeamerBizImpl();
 			Vector<Teamer> teamers = teamerBiz.listTeamerByRecord(records);
 			request.setAttribute("data", records);
@@ -65,9 +76,11 @@ public class ContestDetailServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
