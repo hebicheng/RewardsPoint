@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import reward.biz.TeamerBiz;
+import reward.biz.impl.TeamerBizImpl;
+
 /**
  * Servlet implementation class AccountServlet
  */
@@ -34,6 +37,8 @@ public class AccountServlet extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		}
+		TeamerBiz teamerBiz = new TeamerBizImpl();
+		request.setAttribute("urldata", teamerBiz.getTeamerByUsername((String)session.getAttribute("username")));
 		request.getRequestDispatcher("mine_account.jsp").forward(request, response);
 	}
 

@@ -32,7 +32,8 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 						Date time = rs.getDate("time");
 						String oj = rs.getString("oj");
 						String url = rs.getString("url");
-						contest = new Contest(id, name, content, type, weight, time, oj, url);
+						int num = rs.getInt("num");
+						contest = new Contest(id, name, content, type, weight, time, oj, url, num);
 					}
 				}
 
@@ -64,7 +65,8 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 						Date time = rs.getDate("time");
 						String oj = rs.getString("oj");
 						String url = rs.getString("url");
-						contest = new Contest(id, name, content, type, weight, time, oj, url);
+						int num = rs.getInt("num");
+						contest = new Contest(id, name, content, type, weight, time, oj, url, num);
 					}
 				}
 
@@ -96,7 +98,8 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 					Date time = rs.getDate("time");
 					String oj = rs.getString("oj");
 					String url = rs.getString("url");
-					Contest contest = new Contest(id, name, content, type, weight, time, oj, url);
+					int num = rs.getInt("num");
+					Contest contest = new Contest(id, name, content, type, weight, time, oj, url, num);
 					contests.add(contest);
 				}
 				return contests;
@@ -108,9 +111,9 @@ public class ContestDaoImpl extends BaseDao implements ContestDao {
 
 	@Override
 	public int insert(Contest contest) {
-		String sql = "insert contest (name, content, type, weight, time, oj, url) values(?,?,?,?,?,?,?)";
+		String sql = "insert contest (name, content, type, weight, time, oj, url, num) values(?,?,?,?,?,?,?,?)";
 		Object[] params = { contest.getName(), contest.getContent(), contest.getType(), contest.getWeight(),
-				contest.getTime(), contest.getOj(), contest.getUrl() };
+				contest.getTime(), contest.getOj(), contest.getUrl(), contest.getNum() };
 		return this.executeUpdate(sql, params);
 	}
 

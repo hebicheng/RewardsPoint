@@ -1,8 +1,6 @@
 package reward.servlet;
 
 import java.io.IOException;
-import java.util.Vector;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,27 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import reward.biz.RecordBiz;
+import reward.biz.ChangePasswordBiz;
 import reward.biz.TeamerBiz;
-import reward.biz.impl.RecordBizImpl;
+import reward.biz.impl.ChangePasswordBizImpl;
 import reward.biz.impl.TeamerBizImpl;
-import reward.dao.ContestDao;
-import reward.dao.impl.ContestDaoImpl;
-import reward.entity.Contest;
-import reward.entity.Record;
-import reward.entity.Teamer;
+import reward.dao.TeamerDao;
+import reward.dao.impl.TeamerDaoImpl;
 
 /**
- * Servlet implementation class AdminContestServlet
+ * Servlet implementation class ChangeOjUrlServlet
  */
-@WebServlet("/AdminContestServlet")
-public class ContestDetailServlet extends HttpServlet {
+@WebServlet("/ChangeOjUrlServlet")
+public class ChangeOjUrlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContestDetailServlet() {
+    public ChangeOjUrlServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,29 +34,24 @@ public class ContestDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();  
+		HttpSession session = request.getSession();
 		if(session.getAttribute("type") == null){
 			response.sendRedirect("login");
 			return;
 		}
-		String idString = request.getParameter("id");
-		int id = Integer.parseInt(idString);
-		ContestDao contestDao = new ContestDaoImpl();
-		Contest contest = contestDao.findContestById(id);
-		if(contest == null) {
-			System.out.println("Contest not find.");
+		String username = (String) session.getAttribute("username");
+		String sicnuoj = request.getParameter("sicnuoj");
+		String codeforces = request.getParameter("codeforces");
+		String atcoder = request.getParameter("atcoder");
+		TeamerBiz teamerBiz = new TeamerBizImpl();
+
+		int status = teamerBiz.changeOjUrl(username, sicnuoj, codeforces, atcoder);
+		if(status == 0){
+			request.setAttribute("curlmessage", "Saved.");
 		}
-		RecordBiz recordBiz = new RecordBizImpl();
-		Vector<Record> records = recordBiz.listRecordByContest(contest);
-		if (records!= null){
-			TeamerBiz teamerBiz = new TeamerBizImpl();
-			Vector<Teamer> teamers = teamerBiz.listTeamerByRecord(records);
-			request.setAttribute("data", records);
-			request.setAttribute("teamers", teamers);
-		}
-		request.setAttribute("contest", contest);
-		request.getRequestDispatcher("contestdetail.jsp").forward(request, response);
+		request.getRequestDispatcher("account").forward(request, response);
 	}
 
 	/**

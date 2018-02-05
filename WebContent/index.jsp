@@ -104,7 +104,7 @@
 							<td><a href="https://acm.sicnu.edu.cn/user-home?username=${data.sicnuoj}">${data.sicnuoj}</a></td>
 							<td><a href="http://codeforces.com/profile/${data.cf}">${data.cf}</a></td>
 							<td><a href="http://atcoder.jp/user/${data.atcoder}">${data.atcoder}</a></td>
-							<td>${data.point}</td>
+							<td>${data.showPoint}</td>
 							<c:set var="index" value="${index+1}" ></c:set>
 						</tr>
 						</c:forEach>

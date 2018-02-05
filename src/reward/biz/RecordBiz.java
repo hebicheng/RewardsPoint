@@ -2,15 +2,19 @@ package reward.biz;
 
 import java.util.Vector;
 
+import reward.entity.Contest;
 import reward.entity.Record;
-import reward.entity.Teamer;
 
 public interface RecordBiz {
-	Vector<Record> listRecordBycontest(String contest);
+	Vector<Record> listRecordByContest(Contest contest);
+
 	Vector<Record> getRecordsByUsername(String username);
-	boolean updateRecord(Record record);
-	
-	double getPointByTeamer(Teamer teamer);
-	
+
+	boolean updateTrainContestRecord(Record record, int num);
+
+	boolean updatePersonContest(Record record);
+
+	// double getPointByTeamer(Teamer teamer);
+
 	int getNumByContest(String contest);
 }

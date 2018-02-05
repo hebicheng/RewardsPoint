@@ -19,12 +19,14 @@ public class Teamer {
 		this.password = password;
 	}
 	
-	public Teamer(String name, int grade, double point) {
+	public Teamer(String name, int grade, double point,String sicnuoj, String cf, String atcoder) {
 		super();
 		this.name = name;
 		this.grade = grade;
 		this.point = point;
-		new DecimalFormat("#.0").format(this.point);
+		this.cf = cf;
+		this.atcoder = atcoder;
+		this.sicnuoj = sicnuoj;
 	}
 	
 	public Teamer(String username, String name, int grade, String sicnuoj, String cf, String atcoder, double point) {
@@ -36,7 +38,6 @@ public class Teamer {
 		this.cf = cf;
 		this.atcoder = atcoder;
 		this.point = point;
-		new DecimalFormat("#.0").format(this.point);
 	}
 	
 	public String getUsername() {
@@ -87,6 +88,10 @@ public class Teamer {
 	public void setPoint(double point) {
 		this.point = point;
 	}
-	
+	public String getShowPoint() {
+		DecimalFormat df= new DecimalFormat(".##");
+		String showPoint = df.format(this.point);
+		return showPoint;
+	}
 	
 }

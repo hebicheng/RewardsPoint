@@ -12,9 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import reward.biz.RecordBiz;
 import reward.biz.impl.RecordBizImpl;
-import reward.dao.ContestDao;
-import reward.dao.impl.ContestDaoImpl;
-import reward.entity.Contest;
 import reward.entity.Record;
 
 /**

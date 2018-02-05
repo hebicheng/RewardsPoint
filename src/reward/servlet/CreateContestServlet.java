@@ -51,11 +51,13 @@ public class CreateContestServlet extends HttpServlet {
 		int weight = 1;
 		Date time = new Date();
 		String oj, url;
+		int num;
 		if(type == 0) {
 			String weightString = request.getParameter("cWeight");
 			weight = Integer.parseInt(weightString);
 			oj = request.getParameter("cOj");
 			url = request.getParameter("cUrl");
+			num = Integer.parseInt(request.getParameter("cNum"));
 		} else {
 			oj = request.getParameter("cOJ");
 			if(oj.equals("codeforces")) {
@@ -63,8 +65,9 @@ public class CreateContestServlet extends HttpServlet {
 			} else {
 				url = "http://atcoder.jp/";
 			}
+			num = 0;
 		}
-		Contest contest = new Contest(name, content, type, weight, time, oj, url);
+		Contest contest = new Contest(name, content, type, weight, time, oj, url, num);
 		ContestDao contestDao = new ContestDaoImpl();
 		contestDao.insert(contest);
 		response.sendRedirect("Contests");

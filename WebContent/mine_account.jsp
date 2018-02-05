@@ -122,6 +122,48 @@
 							
 						</div>
 					</div>
+					<br/>
+					<div class="card">
+						<div class="card-header">
+							<h4>OJ Account </h4>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<form class="form-horizontal col-sm-6" id="changeOJForm" method="post" action="changeojurl" role="form">
+								    <div class="row">
+								        <div class="col-md-offset-6 col-md-12">
+											<div class="form-group">
+												<h5>SICNU OJ</h5>
+												<input type="text" class="form-control" id="sicnuoj" name="sicnuoj" placeholder="sicnuoj" value="${urldata.sicnuoj}"></input>
+												<i class="fa fa-user"></i>
+											</div>
+											<div class="form-group">
+												<h5>Codeforces</h5>
+												<input type="text" class="form-control" id="codeforces" name="codeforces" placeholder="codeforces" value="${urldata.cf}">
+												<i class="fa fa-lock"></i>
+												<!--<a href="#" class="fa fa-question-circle"></a>-->
+											</div>
+											<div class="form-group">
+												<h5>AtCoder</h5>
+												<input type="text" class="form-control" id="atcoder" name="atcoder" placeholder="atcoder" value="${urldata.atcoder}">
+												<i class="fa fa-lock"></i>
+												<!--<a href="#" class="fa fa-question-circle"></a>-->
+											</div>
+								        </div>
+								   </div>
+									<div class="modal-footer">
+										<input type="submit" class="btn btn-primary" value="Submit">
+									</div>
+									<c:if test="${not empty curlmessage }">
+										<div class="alert alert-success" id="curlMessage">
+											<strong>${curlmessage }</strong>
+										</div>	
+									</c:if>
+								</form>
+							</div>
+							
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

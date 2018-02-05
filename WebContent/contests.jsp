@@ -141,6 +141,11 @@
 						</div>
 						<div class="trainContest">
 							<div class="form-group">
+								<label for="cNum">参加人数:</label>
+	    						<input type="text" class="form-control" id="cNum" name="cNum" value="1">
+							</div>
+						
+							<div class="form-group">
 								<label for="cWeight">比赛权重:</label>
 	    						<input type="text" class="form-control" id="cWeight" name="cWeight" value="1">
 							</div>
@@ -154,6 +159,7 @@
 								<label for="cUrl">地址:</label>
 	    						<input type="text" class="form-control" id="cUrl" name="cUrl">
 							</div>
+							
 						</div>
 					    <div class="personContest">
 					    	<div class="form-group">

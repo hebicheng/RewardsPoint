@@ -25,7 +25,6 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 				if (rs != null) {
 					if (rs.next()) {
 						String username = rs.getString("username");
-						String name = rs.getString("name");
 						String contest = rs.getString("contest");
 						int rating = rs.getInt("rating");
 						int ac = rs.getInt("ac");
@@ -34,7 +33,7 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 						int fb = rs.getInt("fb");
 						int type = rs.getInt("type");
 						String updateTime = rs.getString("updateTime");
-						record = new Record(name, username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
+						record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
 					}
 				}
 
@@ -47,19 +46,19 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 	@Override
 	public int insert(Record record) {
-		String sql = "insert record (username, name, contest, ac, rank, onlyAC, fb, updateTime) values(?,?,?,?,?,?,?,?)";
-		Object[] params = { record.getUsername(), record.getName(), record.getContest(), record.getAc(),
-				record.getRank(), record.getOnlyAC(), record.getFb(), new CurrentTime().getDateString() };
+		String sql = "insert record (username, contest, type, ac, rank, onlyAC, fb, rating, updateTime) values(?,?,?,?,?,?,?,?,?)";
+		Object[] params = { record.getUsername(), record.getContest(), record.getType(), record.getAc(), record.getRank(),
+				record.getOnlyAC(), record.getFb(), record.getRating(), new CurrentTime().getDateString() };
 		return this.executeUpdate(sql, params);
 	}
 
-	@Override
-	public int update(Record record) {
-		String sql = "update record set ac=?,rank=?,onlyAC=?, fb=?, updateTime=? where username=? and contest=?";
-		Object[] params = { record.getAc(), record.getRank(), record.getOnlyAC(), record.getFb(),
-				new CurrentTime().getDateString(), record.getUsername(), record.getContest() };
-		return this.executeUpdate(sql, params);
-	}
+//	@Override
+//	public int update(Record record) {
+//		String sql = "update record set ac=?,rank=?,onlyAC=?, fb=?, updateTime=? where username=? and contest=?";
+//		Object[] params = { record.getAc(), record.getRank(), record.getOnlyAC(), record.getFb(),
+//				new CurrentTime().getDateString(), record.getUsername(), record.getContest() };
+//		return this.executeUpdate(sql, params);
+//	}
 
 	@Override
 	public int deleteRecordByTeamerAndContest(String userName, String contest) {
@@ -81,7 +80,6 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 				while (rs.next()) {
 					String username = rs.getString("username");
-					String name = rs.getString("name");
 					String contest = rs.getString("contest");
 					int rating = rs.getInt("rating");
 					int ac = rs.getInt("ac");
@@ -91,7 +89,7 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 					int type = rs.getInt("type");
 					String updateTime = rs.getString("updateTime");
 
-					Record record = new Record(name, username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
+					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
 					records.add(record);
 				}
 				return records;
@@ -137,7 +135,6 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 				while (rs.next()) {
 					String username = rs.getString("username");
-					String name = rs.getString("name");
 					String contest = rs.getString("contest");
 					int rating = rs.getInt("rating");
 					int ac = rs.getInt("ac");
@@ -147,7 +144,7 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 					int type = rs.getInt("type");
 					String updateTime = rs.getString("updateTime");
 
-					Record record = new Record(name, username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
+					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
 					records.add(record);
 				}
 				return records;

@@ -2,6 +2,8 @@ package reward.dao;
 
 import java.util.Vector;
 
+import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
+
 import reward.entity.Teamer;
 
 public interface TeamerDao {
@@ -16,5 +18,5 @@ public interface TeamerDao {
 	public int countUserByUsername(String username);
 	public String getTeamerNameByUsername(String username);
 	public int ChangePassword(String username, String password);
-
+	public int changeOjUrl(String username, String sicnuoj, String codeforce, String atcoder);
 }

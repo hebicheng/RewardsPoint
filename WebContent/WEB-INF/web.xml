@@ -119,6 +119,14 @@
     <servlet-name>ChangePasswordServlet</servlet-name>
     <url-pattern>/changepwd</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ChangeOjUrlServlet</servlet-name>
+    <servlet-class>reward.servlet.ChangeOjUrlServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeOjUrlServlet</servlet-name>
+    <url-pattern>/changeojurl</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>sql_dialect</param-name>
     <param-value>mysql</param-value>
