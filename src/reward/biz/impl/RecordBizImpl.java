@@ -47,21 +47,22 @@ public class RecordBizImpl implements RecordBiz {
 		Record oldRecord = recordDao.findRecordByTeamerAndContest(record.getUsername(), record.getContest());
 
 		recordDao.deleteRecordByTeamerAndContest(record.getUsername(), record.getContest());
-		if (recordDao.insert(record) != 0) {
-			record.calcScore(num);
-			double newPoint = record.getScore();
-			double oldPoint;
-			if (oldRecord == null) {
-				oldPoint = 0;
-			} else {
-				oldRecord.calcScore(num);
-				oldPoint = oldRecord.getScore();
-			}
-			double dPoint = newPoint - oldPoint;
-			PartitionPointBiz pBiz = new PartitionPointBizImpl();
-			return pBiz.updateTrainContest(record.getUsername(), dPoint) == 1;
+
+		record.calcScore(num);
+		double newPoint = record.getScore();
+		double oldPoint;
+		if (oldRecord == null) {
+			oldPoint = 0;
+		} else {
+			oldRecord.calcScore(num);
+			oldPoint = oldRecord.getScore();
 		}
-		return false;
+		double dPoint = newPoint - oldPoint;
+		PartitionPointBiz pBiz = new PartitionPointBizImpl();
+		double nowPoint = pBiz.updateTrainContest(record.getUsername(), dPoint);
+		record.setNowPoint(nowPoint);
+		recordDao.insert(record);
+		return true;
 	}
 
 	@Override
@@ -69,21 +70,22 @@ public class RecordBizImpl implements RecordBiz {
 		Record oldRecord = recordDao.findRecordByTeamerAndContest(record.getUsername(), record.getContest());
 
 		recordDao.deleteRecordByTeamerAndContest(record.getUsername(), record.getContest());
-		if (recordDao.insert(record) != 0) {
-			record.calcScore();
-			double newPoint = record.getScore();
-			double oldPoint;
-			if (oldRecord == null) {
-				oldPoint = 0;
-			} else {
-				oldRecord.calcScore();
-				oldPoint = oldRecord.getScore();
-			}
-			double dPoint = newPoint - oldPoint;
-			PartitionPointBiz pBiz = new PartitionPointBizImpl();
-			return pBiz.updatePersonContest(record.getUsername(), dPoint) == 1;
+
+		record.calcScore();
+		double newPoint = record.getScore();
+		double oldPoint;
+		if (oldRecord == null) {
+			oldPoint = 0;
+		} else {
+			oldRecord.calcScore();
+			oldPoint = oldRecord.getScore();
 		}
-		return false;
+		double dPoint = newPoint - oldPoint;
+		PartitionPointBiz pBiz = new PartitionPointBizImpl();
+		double nowPoint = pBiz.updatePersonContest(record.getUsername(), dPoint);
+		record.setNowPoint(nowPoint);
+		recordDao.insert(record);
+		return true;
 	}
 
 	@Override

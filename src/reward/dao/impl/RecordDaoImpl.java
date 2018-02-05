@@ -33,7 +33,8 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 						int fb = rs.getInt("fb");
 						int type = rs.getInt("type");
 						String updateTime = rs.getString("updateTime");
-						record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
+						double nowPoint = rs.getDouble("nowPoint");
+						record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint);
 					}
 				}
 
@@ -46,9 +47,9 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 	@Override
 	public int insert(Record record) {
-		String sql = "insert record (username, contest, type, ac, rank, onlyAC, fb, rating, updateTime) values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert record (username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint) values(?,?,?,?,?,?,?,?,?,?)";
 		Object[] params = { record.getUsername(), record.getContest(), record.getType(), record.getAc(), record.getRank(),
-				record.getOnlyAC(), record.getFb(), record.getRating(), new CurrentTime().getDateString() };
+				record.getOnlyAC(), record.getFb(), record.getRating(), new CurrentTime().getDateString(), record.getNowPoint() };
 		return this.executeUpdate(sql, params);
 	}
 
@@ -88,8 +89,8 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 					int fb = rs.getInt("fb");
 					int type = rs.getInt("type");
 					String updateTime = rs.getString("updateTime");
-
-					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
+					double nowPoint = rs.getDouble("nowPoint");
+					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint);
 					records.add(record);
 				}
 				return records;
@@ -143,8 +144,8 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 					int fb = rs.getInt("fb");
 					int type = rs.getInt("type");
 					String updateTime = rs.getString("updateTime");
-
-					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime);
+					double nowPoint = rs.getDouble("nowPoint");
+					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint);
 					records.add(record);
 				}
 				return records;
