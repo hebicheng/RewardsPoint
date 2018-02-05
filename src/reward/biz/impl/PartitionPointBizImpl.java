@@ -80,10 +80,7 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 			partitionPoint = new PartitionPoint(userName, 0, 0, dPoint, 0);
 			pointDao.insert(partitionPoint);
 		} else {
-			partitionPoint.setSolveProblem(partitionPoint.getPersonContest() + dPoint);
-			System.out.println("老成绩:" + partitionPoint.getTrainContest());
-			System.out.println("变化:" + dPoint);
-			System.out.println("新成绩：" + (partitionPoint.getPersonContest() + dPoint));
+			partitionPoint.setSolveProblem(partitionPoint.getSolveProblem() + dPoint);
 			pointDao.update(partitionPoint);
 		}
 		
@@ -97,10 +94,7 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 			partitionPoint = new PartitionPoint(userName, 0, 0, 0, dPoint);
 			pointDao.insert(partitionPoint);
 		} else {
-			partitionPoint.setAttendance(partitionPoint.getPersonContest() + dPoint);
-			System.out.println("老成绩:" + partitionPoint.getTrainContest());
-			System.out.println("变化:" + dPoint);
-			System.out.println("新成绩：" + (partitionPoint.getPersonContest() + dPoint));
+			partitionPoint.setAttendance(partitionPoint.getAttendance() + dPoint);
 			pointDao.update(partitionPoint);
 		}
 		
