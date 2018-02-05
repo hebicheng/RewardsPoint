@@ -7,4 +7,5 @@ public interface PartitionPointDao {
 	public PartitionPoint findByUsername(String username);
 	public int insert(PartitionPoint PPoint);
 	public int update(PartitionPoint PPoint);
+	public int deleteTeamerPartitionPoint(String username);
 }

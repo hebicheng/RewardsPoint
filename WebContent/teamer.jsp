@@ -250,7 +250,11 @@
 					</div>
 				
 					<div class="modal-body">
+						<div class="d-none">
+							<input type="text" name="delete_username" id="delete_username">
+						</div>
 						<div class="alert alert-danger">
+						
 						  	<strong>确认删除？</strong>
 						</div>
 						

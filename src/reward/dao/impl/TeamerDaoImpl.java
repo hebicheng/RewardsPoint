@@ -230,4 +230,18 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		return this.executeUpdate(sql, params);
 	}
 
+	@Override
+	public int addteamer(Teamer teamer) {
+		String sql = "insert teamer (username, password, name, grade, sicnuoj, cf, atcoder) values (?,?,?,?,?,?,?)";
+		Object[] params = { teamer.getUsername(),teamer.getPassword(), teamer.getName(), teamer.getGrade(), teamer.getSicnuoj(), teamer.getCf(), teamer.getAtcoder()};
+		return this.executeUpdate(sql, params);
+	}
+
+	@Override
+	public int deleteTeamer(String username) {
+		String sql = "delete from teamer where username = ?";
+		Object[] params = { username };
+		return this.executeUpdate(sql, params);
+	}
+
 }

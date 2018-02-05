@@ -142,6 +142,7 @@
 														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
 														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
 														 <div class="badge badge-pill badge-info">Personal Contest</div>
+														 <div class="badge badge-pill badge-info">Codeforces</div>
 														 <div class="badge badge-pill badge-info">${data.contest}</div>
 													</div>
 													<div class="col-sm-2">
@@ -161,6 +162,27 @@
 													<div class="col-sm-4">
 														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
 														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
+														 <div class="badge badge-pill badge-info">Personal Contest</div>
+														 <div class="badge badge-pill badge-info">Atcoder</div>
+														 <div class="badge badge-pill badge-info">${data.contest}</div>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-primary">
+														 	Rating <span class="badge badge-light">${data.rating}</span>
+														 </button>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</c:when>
+									<c:when test="${data.type == 3 }">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-sm-4">
+														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
+														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
 														 <div class="badge badge-pill badge-info">Daily Practice</div>
 														 <div class="badge badge-pill badge-info">Monthly statistics </div>
 													</div>
@@ -174,7 +196,7 @@
 											</div>
 										</div>
 									</c:when>
-									<c:when test="${data.type == 3 }">
+									<c:when test="${data.type == 4 }">
 										<div class="card">
 											<div class="card-body">
 												<div class="row">

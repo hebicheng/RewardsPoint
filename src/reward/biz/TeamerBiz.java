@@ -10,4 +10,7 @@ public interface TeamerBiz {
 	public int changeOjUrl(String username, String sicnuoj, String codeforce, String atcoder);
 	public Teamer getTeamerByUsername(String username);
 	public int updateTeamerInfo(Teamer teamer);
+	public int addTeamer(Teamer teamer);
+	public int deleteTeamer(String username);
+
 }

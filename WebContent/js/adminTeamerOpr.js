@@ -12,11 +12,10 @@ $(document).ready(function () {
         $("#sicnuoj").val(sicnuoj);
         $("#codeforces").val(codeforces);
         $("#atcoder").val(atcoder);
-       
     });
     $(".update_l2_delete").click(function () {
         var username = $(this).parent().parent().parent().parent().parent().children('td').eq(1).text();
-        $("#username").val(username);
+        $("#delete_username").val(username);
     });
     $(".update_l1").click(function () {
         var username = $(this).parent().parent().parent().children('td').eq(1).text();

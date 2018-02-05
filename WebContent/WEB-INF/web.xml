@@ -143,6 +143,22 @@
     <servlet-name>UpdateTeamerInfoServlet</servlet-name>
     <url-pattern>/updateteamerinfo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddTeamerServlet</servlet-name>
+    <servlet-class>reward.servlet.AddTeamerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTeamerServlet</servlet-name>
+    <url-pattern>/addteamer</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteTeamerServlet</servlet-name>
+    <servlet-class>reward.servlet.DeleteTeamerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTeamerServlet</servlet-name>
+    <url-pattern>/deleteteamer</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>sql_dialect</param-name>
     <param-value>mysql</param-value>

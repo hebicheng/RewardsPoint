@@ -20,4 +20,6 @@ public interface TeamerDao {
 	public int ChangePassword(String username, String password);
 	public int changeOjUrl(String username, String sicnuoj, String codeforce, String atcoder);
 	public int updateTeamerInfo(Teamer teamer);
+	public int addteamer(Teamer teamer);
+	public int deleteTeamer(String username);
 }

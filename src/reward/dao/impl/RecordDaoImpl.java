@@ -155,4 +155,11 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 		return (Vector<Record>) this.executeQuery(getAllUsersProcessor, sql, params);
 	}
 
+	@Override
+	public int deleteTeamerRecord(String username) {
+		String sql = "delete from record where username=?";
+		Object[] params = { username };
+		return this.executeUpdate(sql, params);
+	}
+
 }

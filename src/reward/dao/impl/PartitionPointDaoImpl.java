@@ -78,6 +78,13 @@ public class PartitionPointDaoImpl extends BaseDao implements PartitionPointDao 
 		return (PartitionPoint) this.executeQuery(findPartitionPointbyUsernameProcessor, sql, params);
 	}
 
+	@Override
+	public int deleteTeamerPartitionPoint(String username) {
+		String sql = "delete from partition_point where username=?";
+		Object[] params = { username };
+		return this.executeUpdate(sql, params);
+	}
+
 
 	
 

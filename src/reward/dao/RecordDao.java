@@ -13,4 +13,6 @@ public interface RecordDao {
 	public int deleteRecordByTeamerAndContest(String userName, String contest);
 	
 	public int countRecordByContest(String contest);
+	
+	public int deleteTeamerRecord(String username);
 }
