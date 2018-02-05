@@ -13,6 +13,10 @@ public interface RecordBiz {
 	boolean updateTrainContestRecord(Record record, int num);
 
 	boolean updatePersonContest(Record record);
+	
+	boolean updatePracticePoint(Record record);
+	
+	boolean updateAttendancePoint(Record record);
 
 	// double getPointByTeamer(Teamer teamer);
 

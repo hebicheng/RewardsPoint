@@ -59,6 +59,18 @@ public class Record {
 		this.isUpdate = true;
 	}
 
+	/**
+	 * 构造刷题量
+	 */
+	public Record(String username, int type, int rating, String updateTime) {
+		super();
+		this.username = username;
+		this.type = type;
+		this.rating = rating;
+		this.updateTime = updateTime;
+		this.isUpdate = true;
+	}
+	
 	public Record(String username, String contest) {
 		super();
 		this.username = username;
@@ -88,8 +100,10 @@ public class Record {
 			t = Math.max(0, (this.rating-1000.0)/40);
 		} else if (type == 2) {  // atcoder
 			t = Math.max(0, (this.rating-900.0)/80);
-		} else if (type == 3) {
-			// 考勤
+		} else if (type == 3) { // 刷题
+			t = this.rating*0.1;
+		} else if(type == 4) { //考勤 
+			t = this.rating;
 		}
 		this.score = t;
 	}
