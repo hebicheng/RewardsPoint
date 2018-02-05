@@ -268,13 +268,14 @@
 	<div class="modal fade" id="addDailyPracticePoint">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form role="form" id="addDailyPracticePointForm" action="adddailypracticepoint" method="post">
+				<form role="form" id="addDailyPracticePointForm" action="AddDailyPracticePoint" method="post">
 					<div class="modal-header">
 						<h4 class="modal-title">Add Daily Practice Point </h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 				
 					<div class="modal-body">
+						<input type="text" class="d-none" id="dailyUsername" name="username">
 						<input type="text" class="form-control" id="dppoint" name="dppoint" placeholder="Daily Practice Point">	
 					</div>
 					
@@ -290,13 +291,14 @@
 	<div class="modal fade" id="addAttendancePoint">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form role="form" id="addAttendancePointForm" action="addattendancepoint" method="post">
+				<form role="form" id="addAttendancePointForm" action="AddAttendancePoint" method="post">
 					<div class="modal-header">
 						<h4 class="modal-title">Add Attendance Point</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 				
 					<div class="modal-body">
+						<input type="text" class="d-none" id="attendUsername" name="username">
 						<input type="text" class="form-control" id="attendancepoint" name="attendancepoint" placeholder="Attendance Point">		
 					</div>
 					

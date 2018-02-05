@@ -20,6 +20,7 @@ $(document).ready(function () {
     });
     $(".update_l1").click(function () {
         var username = $(this).parent().parent().parent().children('td').eq(1).text();
-        $("#username").val(username);
+        $("#dailyUsername").val(username);
+        $("#attendUsername").val(username);
     });
 });

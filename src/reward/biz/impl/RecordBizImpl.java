@@ -98,4 +98,26 @@ public class RecordBizImpl implements RecordBiz {
 		return recordDao.getRecordsByUsername(username);
 	}
 
+	@Override
+	public boolean updatePracticePoint(Record record) {
+		record.calcScore();
+		double dPoint = record.getScore();
+		PartitionPointBiz pBiz = new PartitionPointBizImpl();
+		double nowPoint = pBiz.updateSolveProblem(record.getUsername(), dPoint);
+		record.setNowPoint(nowPoint);
+		recordDao.insert(record);
+		return true;
+	}
+
+	@Override
+	public boolean updateAttendancePoint(Record record) {
+		record.calcScore();
+		double dPoint = record.getScore();
+		PartitionPointBiz pBiz = new PartitionPointBizImpl();
+		double nowPoint = pBiz.updateAttendance(record.getUsername(), dPoint);
+		record.setNowPoint(nowPoint);
+		recordDao.insert(record);
+		return true;
+	}
+
 }
