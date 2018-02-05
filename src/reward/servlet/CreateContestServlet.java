@@ -39,7 +39,12 @@ public class CreateContestServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("type") == null){
-			response.sendRedirect("login");
+			response.sendRedirect("admin");
+			return;
+		}
+		if((int)session.getAttribute("type") != 0){
+			session.invalidate();
+			response.sendRedirect("admin");
 			return;
 		}
 		String name = request.getParameter("cName");

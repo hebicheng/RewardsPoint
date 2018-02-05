@@ -9,4 +9,5 @@ public interface TeamerBiz {
 	public Vector<Teamer> listTeamerByRecord(Vector<Record> records);
 	public int changeOjUrl(String username, String sicnuoj, String codeforce, String atcoder);
 	public Teamer getTeamerByUsername(String username);
+	public int updateTeamerInfo(Teamer teamer);
 }

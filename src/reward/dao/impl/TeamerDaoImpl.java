@@ -223,4 +223,11 @@ public class TeamerDaoImpl extends BaseDao implements TeamerDao {
 		return this.executeUpdate(sql, params);
 	}
 
+	@Override
+	public int updateTeamerInfo(Teamer teamer) {
+		String sql = "update teamer set password=?, name=?, grade=?,sicnuoj=?, cf=?, atcoder=? where username=?";
+		Object[] params = { teamer.getPassword(), teamer.getName(), teamer.getGrade(), teamer.getSicnuoj(), teamer.getCf(), teamer.getAtcoder(), teamer.getUsername()};
+		return this.executeUpdate(sql, params);
+	}
+
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -96,41 +97,106 @@
 					</c:when>
 					<c:otherwise>
 						<div class="card-body">
-							
-								<c:forEach var="data" items="${data}">
-								<div class="card">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-sm-4">
-												 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
-												 <div class="badge badge-pill badge-info">${data.contest}</div>
-											</div>
-											<div class="col-sm-2">
-												 <button type="button" class="btn btn-primary">
-												 	Rank <span class="badge badge-light">${data.rank}</span>
-												 </button>
-											</div>
-											<div class="col-sm-2">
-												 <button type="button" class="btn btn-success">
-												 	Accpted <span class="badge badge-light">${data.ac}</span>
-												 </button>
-											</div>
-											<div class="col-sm-2">
-												 <button type="button" class="btn btn-danger">
-												 	First Blood <span class="badge badge-light">${data.fb}</span>
-												 </button>
-											</div>
-											<div class="col-sm-2">
-												 <button type="button" class="btn btn-secondary">
-												 	Sole <span class="badge badge-light">${data.onlyAC}</span>
-												 </button>
+							<c:forEach var="data" items="${data}">
+								<c:choose>
+									<c:when test="${data.type == 0 }">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-sm-4">
+														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
+														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
+														 <div class="badge badge-pill badge-info">Training Contest</div>
+														 <div class="badge badge-pill badge-info">${data.contest}</div>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-primary">
+														 	Rank <span class="badge badge-light">${data.rank}</span>
+														 </button>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-success">
+														 	Accpted <span class="badge badge-light">${data.ac}</span>
+														 </button>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-danger">
+														 	First Blood <span class="badge badge-light">${data.fb}</span>
+														 </button>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-secondary">
+														 	Sole <span class="badge badge-light">${data.onlyAC}</span>
+														 </button>
+													</div>
+												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-								</c:forEach>
+									</c:when>
+									
+									<c:when test="${data.type == 1 }">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-sm-4">
+														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
+														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
+														 <div class="badge badge-pill badge-info">Personal Contest</div>
+														 <div class="badge badge-pill badge-info">${data.contest}</div>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-primary">
+														 	Rating <span class="badge badge-light">${data.rating}</span>
+														 </button>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</c:when>
+									<c:when test="${data.type == 2 }">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-sm-4">
+														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
+														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
+														 <div class="badge badge-pill badge-info">Daily Practice</div>
+														 <div class="badge badge-pill badge-info">Monthly statistics </div>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-primary">
+														 	Point <span class="badge badge-light">${data.rating}</span>
+														 </button>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</c:when>
+									<c:when test="${data.type == 3 }">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-sm-4">
+														 <div class="badge badge-pill badge-warning">${data.updateTime}</div>
+														 <div class="badge badge-pill badge-warning"><fmt:formatNumber type="number" value="${data.nowPoint}" pattern="0.00" maxFractionDigits="2"/></div>
+														 <div class="badge badge-pill badge-info">Trainning attendance statistics</div>
+														 <div class="badge badge-pill badge-info"></div>
+													</div>
+													<div class="col-sm-2">
+														 <button type="button" class="btn btn-primary">
+														 	Point <span class="badge badge-light">${data.rating}</span>
+														 </button>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</c:when>
+								</c:choose>	
+							</c:forEach>
 						</div>
-					
 					</c:otherwise>
 				</c:choose>
 			</div>

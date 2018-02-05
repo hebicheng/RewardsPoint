@@ -19,4 +19,5 @@ public interface TeamerDao {
 	public String getTeamerNameByUsername(String username);
 	public int ChangePassword(String username, String password);
 	public int changeOjUrl(String username, String sicnuoj, String codeforce, String atcoder);
+	public int updateTeamerInfo(Teamer teamer);
 }

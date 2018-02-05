@@ -2,6 +2,7 @@ package reward.biz.impl;
 
 import java.util.Vector;
 
+import reward.biz.CreateMD5Password;
 import reward.biz.TeamerBiz;
 import reward.dao.TeamerDao;
 import reward.dao.impl.TeamerDaoImpl;
@@ -11,6 +12,7 @@ import reward.entity.Teamer;
 public class TeamerBizImpl implements TeamerBiz {
 
 	private TeamerDao teamerDao = new TeamerDaoImpl(); 
+	CreateMD5Password createMD5Password = new CreateMD5PasswordImpl();
 	@Override
 	public Vector<Teamer> listTeamerByRecord(Vector<Record> records) {
 		Vector<Teamer> teamers = new Vector<>();
@@ -29,6 +31,11 @@ public class TeamerBizImpl implements TeamerBiz {
 	public Teamer getTeamerByUsername(String username) {
 		Teamer teamer = teamerDao.findTeamerByUsername(username);
 		return teamer;
+	}
+	@Override
+	public int updateTeamerInfo(Teamer teamer) {
+		teamerDao.updateTeamerInfo(teamer);
+		return 0;
 	}
 
 }

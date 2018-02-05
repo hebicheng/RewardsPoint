@@ -127,6 +127,22 @@
     <servlet-name>ChangeOjUrlServlet</servlet-name>
     <url-pattern>/changeojurl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>TeamerOprServlet</servlet-name>
+    <servlet-class>reward.servlet.TeamerOprServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TeamerOprServlet</servlet-name>
+    <url-pattern>/teamer</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateTeamerInfoServlet</servlet-name>
+    <servlet-class>reward.servlet.UpdateTeamerInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateTeamerInfoServlet</servlet-name>
+    <url-pattern>/updateteamerinfo</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>sql_dialect</param-name>
     <param-value>mysql</param-value>

@@ -39,6 +39,16 @@ public class Teamer {
 		this.atcoder = atcoder;
 		this.point = point;
 	}
+	public Teamer(String username,String password, String name, int grade, String sicnuoj, String cf, String atcoder ) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.grade = grade;
+		this.sicnuoj = sicnuoj;
+		this.cf = cf;
+		this.atcoder = atcoder;
+	}
 	
 	public String getUsername() {
 		return username;

@@ -126,7 +126,7 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Vector<Record> getRecordsByUsername(String username) {
-		String sql = "select * from record where username = ?";
+		String sql = "select * from record where username = ? order by updateTime,nowPoint desc";
 		Object[] params = { username };
 
 		RSProcessor getAllUsersProcessor = new RSProcessor() {

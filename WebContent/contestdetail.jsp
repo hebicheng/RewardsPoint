@@ -38,7 +38,7 @@
 				<c:choose>
 					<c:when test="${type == 0}">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Teamer</a>
+							<a class="nav-link" href="teamer">Teamer</a>
 						</li>
 					</c:when>
 				</c:choose>
