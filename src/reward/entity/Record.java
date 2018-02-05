@@ -101,7 +101,7 @@ public class Record {
 		} else if (type == 2) {  // atcoder
 			t = Math.max(0, (this.rating-900.0)/80);
 		} else if (type == 3) { // 刷题
-			t = this.rating*0.1;
+			t = this.rating;
 		} else if(type == 4) { //考勤 
 			t = this.rating;
 		}
