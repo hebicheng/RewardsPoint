@@ -9,7 +9,11 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-
+	
+	<!-- datetimepicker -->
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	
 	<!--validate-->
 	<script src="js/jquery.validate.min.js" type="text/javascript"></script>
 
@@ -87,7 +91,7 @@
 				  	</div>
 				  	<c:if test="${type == 0}">
 						<div class="col-2">
-					  		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Create">创建比赛</button>
+					  		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Create">Create</button>
 					  	</div>
 					</c:if>
 				 </div>
@@ -118,22 +122,26 @@
 			<div class="modal-content">
 				<form role="form" id="createForm" action="CreateContest" method="post">
 					<div class="modal-header">
-						<h4 class="modal-title">创建比赛</h4>
+						<h4 class="modal-title">Create</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 				
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="cName">比赛名:</label>
+							<label for="cName">Name:</label>
     						<input type="text" class="form-control" id="cName" name="cName">
 						</div>
 						
 						<div class="form-group">
-					      	<label for="cContent">说明:</label>
+					      	<label for="cContent">Content:</label>
 					      	<textarea class="form-control" rows="5" id="cContent" name="cContent"></textarea>
 					    </div>
 					    <div class="form-group">
-							<label for="cType">比赛类型:</label>
+					      	<label for="cTime">Time:</label>
+					      	<input type="text" value="" id="cTime" name="cTime" class="form-control">
+					    </div>
+					    <div class="form-group">
+							<label for="cType">type:</label>
 					      	<select class="form-control" id="cType" name="cType">
 					        	<option value="0">训练赛</option>
 					        	<option value="1">个人赛</option>

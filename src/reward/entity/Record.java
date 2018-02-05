@@ -9,12 +9,13 @@ public class Record {
 	private int onlyAC;
 	private int fb;
 	private int rating;
+	private double nowPoint;
 	private String updateTime;
 	boolean isUpdate;
 	private double score;
 
 	public Record(String username, String contest, int type, int ac, int rank, int onlyAC, int fb, int rating,
-			String updateTime) {
+			String updateTime, double nowPoint) {
 		super();
 		this.username = username;
 		this.contest = contest;
@@ -26,6 +27,7 @@ public class Record {
 		this.rating = rating;
 		this.updateTime = updateTime;
 		this.isUpdate = true;
+		this.nowPoint = nowPoint;
 	}
 
 	/**
@@ -66,6 +68,18 @@ public class Record {
 	
 	public double getScore() {
 		return score;
+	}
+
+	public double getNowPoint() {
+		return nowPoint;
+	}
+
+	public void setNowPoint(double nowPoint) {
+		this.nowPoint = nowPoint;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
 	}
 
 	public void calcScore() {

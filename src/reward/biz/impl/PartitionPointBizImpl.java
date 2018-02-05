@@ -13,7 +13,7 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 	PartitionPointDao pointDao = new PartitionPointDaoImpl();
 
 	@Override
-	public int updateTrainContest(String userName, double dPoint) {
+	public double updateTrainContest(String userName, double dPoint) {
 		PartitionPoint partitionPoint = pointDao.findByUsername(userName);
 		if (partitionPoint == null) {
 			partitionPoint = new PartitionPoint(userName, dPoint, 0, 0, 0);
@@ -25,12 +25,12 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 			System.out.println("新成绩：" + (partitionPoint.getTrainContest() + dPoint));
 			pointDao.update(partitionPoint);
 		}
-		updateTeamerRecord(partitionPoint);
-		return 1;
+		
+		return updateTeamerRecord(partitionPoint);
 	}
 
 	@Override
-	public int updatePersonContest(String userName, double dPoint) {
+	public double updatePersonContest(String userName, double dPoint) {
 		PartitionPoint partitionPoint = pointDao.findByUsername(userName);
 		if (partitionPoint == null) {
 			partitionPoint = new PartitionPoint(userName, 0, dPoint, 0, 0);
@@ -42,12 +42,13 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 			System.out.println("新成绩：" + (partitionPoint.getPersonContest() + dPoint));
 			pointDao.update(partitionPoint);
 		}
-		updateTeamerRecord(partitionPoint);
-		return 1;
+		
+		return updateTeamerRecord(partitionPoint);
 	}
 
-	private void updateTeamerRecord(PartitionPoint partitionPoint) {
+	private double updateTeamerRecord(PartitionPoint partitionPoint) {
 		TeamerDao teamerDao = new TeamerDaoImpl();
+		System.out.println(partitionPoint.getUsername());
 		Teamer teamer = teamerDao.findTeamerByUsername(partitionPoint.getUsername());
 		double t = partitionPoint.getTrainContest();
 		double c = partitionPoint.getPersonContest();
@@ -69,6 +70,6 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 		double point = (0.4 * t + 0.3 * c + 0.2 * p + 0.1 * d) * k;
 		System.out.println(point);
 		teamerDao.modifyPointByUsername(partitionPoint.getUsername(), point);
-		return;
+		return point;
 	}
 }
