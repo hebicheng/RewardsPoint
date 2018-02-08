@@ -1,5 +1,7 @@
 package reward.entity;
 
+import java.text.DecimalFormat;
+
 public class Record {
 	private String username;
 	private String contest;
@@ -13,9 +15,10 @@ public class Record {
 	private String updateTime;
 	boolean isUpdate;
 	private double score;
+	private double weight;
 
 	public Record(String username, String contest, int type, int ac, int rank, int onlyAC, int fb, int rating,
-			String updateTime, double nowPoint) {
+			String updateTime, double nowPoint, double weight) {
 		super();
 		this.username = username;
 		this.contest = contest;
@@ -28,12 +31,14 @@ public class Record {
 		this.updateTime = updateTime;
 		this.isUpdate = true;
 		this.nowPoint = nowPoint;
+		this.weight = weight;
 	}
 
 	/**
 	 * 构造训练赛
 	 */
-	public Record(String username, String contest, int ac, int rank, int onlyAC, int fb, String updateTime) {
+	public Record(String username, String contest, int ac, int rank, int onlyAC, int fb,
+			String updateTime, double weight) {
 		super();
 		this.username = username;
 		this.contest = contest;
@@ -44,6 +49,7 @@ public class Record {
 		this.fb = fb;
 		this.updateTime = updateTime;
 		this.isUpdate = true;
+		this.weight = weight;
 	}
 
 	/**
@@ -78,6 +84,20 @@ public class Record {
 		this.isUpdate = false;
 	}
 	
+	public String getShowScore() {
+		DecimalFormat df= new DecimalFormat(".##");
+		String showPoint = df.format(this.score);
+		return showPoint;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
 	public double getScore() {
 		return score;
 	}
@@ -122,7 +142,7 @@ public class Record {
 		} else {
 			t += 1;
 		}
-		score = t;
+		score = t*weight;
 	}
 
 	public int getType() {

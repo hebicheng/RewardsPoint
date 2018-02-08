@@ -34,7 +34,8 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 						int type = rs.getInt("type");
 						String updateTime = rs.getString("updateTime");
 						double nowPoint = rs.getDouble("nowPoint");
-						record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint);
+						double weight = rs.getDouble("weight");
+						record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint, weight);
 					}
 				}
 
@@ -47,9 +48,13 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 
 	@Override
 	public int insert(Record record) {
-		String sql = "insert record (username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint) values(?,?,?,?,?,?,?,?,?,?)";
-		Object[] params = { record.getUsername(), record.getContest(), record.getType(), record.getAc(), record.getRank(),
-				record.getOnlyAC(), record.getFb(), record.getRating(), new CurrentTime().getDateString(), record.getNowPoint() };
+		String sql = "insert record "
+				+ "(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint, weight) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = { record.getUsername(), record.getContest(), 
+				record.getType(), record.getAc(), record.getRank(),
+				record.getOnlyAC(), record.getFb(), record.getRating(), 
+				new CurrentTime().getDateString(), record.getNowPoint(), record.getWeight() };
 		return this.executeUpdate(sql, params);
 	}
 
@@ -90,7 +95,9 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 					int type = rs.getInt("type");
 					String updateTime = rs.getString("updateTime");
 					double nowPoint = rs.getDouble("nowPoint");
-					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint);
+					double weight = rs.getDouble("weight");
+					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, 
+							updateTime, nowPoint, weight);
 					records.add(record);
 				}
 				return records;
@@ -126,7 +133,7 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Vector<Record> getRecordsByUsername(String username) {
-		String sql = "select * from record where username = ? order by updateTime,nowPoint desc";
+		String sql = "select * from record where username=? order by updateTime desc,nowPoint desc";
 		Object[] params = { username };
 
 		RSProcessor getAllUsersProcessor = new RSProcessor() {
@@ -145,7 +152,9 @@ public class RecordDaoImpl extends BaseDao implements RecordDao {
 					int type = rs.getInt("type");
 					String updateTime = rs.getString("updateTime");
 					double nowPoint = rs.getDouble("nowPoint");
-					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb, rating, updateTime, nowPoint);
+					double weight = rs.getDouble("weight");
+					Record record = new Record(username, contest, type, ac, rank, onlyAC, fb,
+							rating, updateTime, nowPoint, weight);
 					records.add(record);
 				}
 				return records;

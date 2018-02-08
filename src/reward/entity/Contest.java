@@ -7,12 +7,12 @@ public class Contest {
 	private String name;
 	private String content;
 	private int type;
-	private int weight;
+	private double weight;
 	private Date time;
 	private String oj;
 	private String url;
 	private int num;
-	public Contest(String name, String content, int type, int weight, Date time, String oj, String url, int num) {
+	public Contest(String name, String content, int type, double weight, Date time, String oj, String url, int num) {
 		super();
 		this.name = name;
 		this.content = content;
@@ -23,7 +23,7 @@ public class Contest {
 		this.url = url;
 		this.num = num;
 	}
-	public Contest(int id, String name, String content, int type, int weight, Date time, String oj, String url, int num) {
+	public Contest(int id, String name, String content, int type, double weight, Date time, String oj, String url, int num) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -65,10 +65,10 @@ public class Contest {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 	public Date getTime() {

@@ -141,7 +141,7 @@
 											<td><button type="button" class="btn btn-primary btn-sm update" data-toggle="modal" data-target="#Update">Update</button></td>
 										</c:if>
 										<c:if test="${type == 1}">
-											<td>${data.score }</td>
+											<td>${data.showScore }</td>
 										</c:if>
 									</tr>
 								</c:when>

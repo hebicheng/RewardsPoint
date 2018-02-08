@@ -100,6 +100,7 @@
 						<tr>
 							<th>#</th>
 							<th>name</th>
+							<th>time</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -108,6 +109,7 @@
 							<tr>
 								<td>${index}</td>
 								<td><a href="contest?id=${contest.id }">${contest.name}</a></td>
+								<td>${contest.time }</td>
 								<c:set var="index" value="${index+1}" ></c:set>
 							</tr>
 						</c:forEach>

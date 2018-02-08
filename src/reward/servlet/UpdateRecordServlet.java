@@ -62,7 +62,9 @@ public class UpdateRecordServlet extends HttpServlet {
 			int onlyAC = Integer.parseInt(request.getParameter("onlyAC"));
 			int fb = Integer.parseInt(request.getParameter("fb"));
 			int num = contest.getNum();
-			Record record = new Record(username, contest.getName(), ac, rank, onlyAC, fb, new CurrentTime().getDateString());
+			double weight = contest.getWeight();
+			Record record = new Record(username, contest.getName(), ac, rank, onlyAC, fb, 
+					new CurrentTime().getDateString(), weight);
 			recordBiz.updateTrainContestRecord(record, num);
 		} else {
 			System.out.println("personContests:");

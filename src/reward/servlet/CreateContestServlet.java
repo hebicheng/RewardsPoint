@@ -55,7 +55,7 @@ public class CreateContestServlet extends HttpServlet {
 		}
 		String content = request.getParameter("cContent");
 		int type = Integer.parseInt(request.getParameter("cType"));
-		int weight = 1;
+		double weight = 1;
 		String cTime = request.getParameter("cTime");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	    ParsePosition pos = new ParsePosition(0);
@@ -64,7 +64,7 @@ public class CreateContestServlet extends HttpServlet {
 		int num;
 		if(type == 0) {
 			String weightString = request.getParameter("cWeight");
-			weight = Integer.parseInt(weightString);
+			weight = Double.parseDouble(weightString);
 			oj = request.getParameter("cOj");
 			url = request.getParameter("cUrl");
 			num = Integer.parseInt(request.getParameter("cNum"));
