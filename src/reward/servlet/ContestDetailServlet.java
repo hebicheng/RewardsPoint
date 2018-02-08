@@ -61,9 +61,9 @@ public class ContestDetailServlet extends HttpServlet {
 		if (records != null) {
 			Collections.sort(records, new Comparator<Record>() {
 				public int compare(Record left, Record right) {
-					double l = left.getScore();
-					double r = right.getScore();
-					return l < r?1:-1;
+					Double l = left.getScore();
+					Double r = right.getScore();
+					return r.compareTo(l);
 				}
 			});
 			TeamerBiz teamerBiz = new TeamerBizImpl();
