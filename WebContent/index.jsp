@@ -81,7 +81,14 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
-				<h2>SICNU ACM Team Reward Point List</h2>
+				<div class="col-10">
+			  		<h2>SICNU ACM Team Reward Point List</h2>
+			  	</div>
+			  	<c:if test="${type == 0}">
+					<div class="col-2">
+				  		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Create">Create</button>
+				  	</div>
+				</c:if>
 				<table class="table table-striped">
 					<thead>
 						<tr>

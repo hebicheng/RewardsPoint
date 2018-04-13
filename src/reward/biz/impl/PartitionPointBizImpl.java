@@ -24,10 +24,10 @@ public class PartitionPointBizImpl implements PartitionPointBiz {
 		switch (Integer.parseInt(new CurrentTime().getYearString()) - teamer.getGrade()) {
 		case 0:
 		case 1:
-			k = 1.5;
+			k = 1.2;
 			break;
 		case 2:
-			k = 1.25;
+			k = 1.1;
 			break;
 		case 3:
 			k = 1;
